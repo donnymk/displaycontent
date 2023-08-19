@@ -1,0 +1,22 @@
+CRITICAL - 2022-12-11 14:09:30 --> Undefined variable $base_url
+in APPPATH\Views\dasbor.php on line 3.
+ 1 APPPATH\Views\dasbor.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $base_url', 'APPPATH\\Views\\dasbor.php', 3)
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\dasbor.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('dasbor', [], true)
+ 5 APPPATH\Controllers\Home.php(9): view('dasbor')
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-12-11 14:10:31 --> date() expects at least 1 argument, 0 given
+in APPPATH\Views\dasbor.php on line 3.
+ 1 APPPATH\Views\dasbor.php(3): date()
+ 2 SYSTEMPATH\View\View.php(213): include('APPPATH\\Views\\dasbor.php')
+ 3 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1134): CodeIgniter\View\View->render('dasbor', [], true)
+ 5 APPPATH\Controllers\Home.php(9): view('dasbor')
+ 6 SYSTEMPATH\CodeIgniter.php(927): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(482): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
