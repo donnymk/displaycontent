@@ -102,14 +102,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <p>Ketikkan data outlet di form berikut ini untuk menambahkan outlet baru. Data outlet yang sudah ada berada pada item kotak di bawah form ini.</p>
-                                    <form class="form-horizontal">
+                                    <?= form_open_multipart(base_url('public/input_outlet'), 'class="form-horizontal"') ?>
                                         <div class="form-group">
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <div class="input-group-addon">
                                                         Nama outlet
                                                     </div>
-                                                    <input type="text" class="form-control"/>
+                                                    <input type="text" name="namaOutlet" class="form-control"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
@@ -117,7 +117,7 @@
                                                     <div class="input-group-addon">
                                                         Alamat
                                                     </div>
-                                                    <input type="text" class="form-control"/>
+                                                    <input type="text" name="alamatOutlet" class="form-control"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -125,7 +125,7 @@
                                                     <div class="input-group-addon">
                                                         Kota
                                                     </div>
-                                                    <select class="form-control">
+                                                    <select name="kotaOutlet" class="form-control">
                                                         <option>--Pilih Kota--</option>
                                                         <option value="Kota Semarang">Kota Semarang</option>
                                                     </select>
@@ -138,7 +138,7 @@
                                                     <div class="input-group-addon">
                                                         Username
                                                     </div>
-                                                    <input type="text" class="form-control"/>
+                                                    <input type="text" name="usernameOutlet" class="form-control"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -146,13 +146,13 @@
                                                     <div class="input-group-addon">
                                                         Password
                                                     </div>
-                                                    <input type="text" class="form-control"/>
+                                                    <input type="text" name="passwordOutlet" class="form-control"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group"></div>
-                                        <button class="btn btn-success btn-block"><span class="fa fa-floppy-o"></span> Tambahkan outlet</button>
-                                    </form>
+                                        <button type="submit" class="btn btn-success btn-block"><span class="fa fa-floppy-o"></span> Tambahkan outlet</button>
+                                    <?= form_close() ?>
                                 </div>
                             </div>
 

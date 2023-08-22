@@ -59,13 +59,13 @@ class SuperadmModel extends Model {
         return $query;
     }
 
-    // insert data CBM items
-//    public function insertDataUpload($data) {
-//        $builder = $this->builder();
-//        // insert data
-//        //return $builder->set($data)->getCompiledInsert();
-//        return $builder->insert($data);
-//    }
+    // insert data
+    public function insertOutlet($data) {
+        // tentukan tabel
+        $builder = $this->builder();
+        // insert data
+        return $builder->insert($data);
+    }
 
     // kosongkan data upload
 //    public function empty_data_up() {
