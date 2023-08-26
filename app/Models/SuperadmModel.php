@@ -14,7 +14,7 @@ class SuperadmModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     //protected $useSoftDeletes = true;
-    protected $allowedFields = ['username', 'password', 'nama_outlet', 'alamat_outlet', 'kota', 'timestamp'];
+    protected $allowedFields = ['username', 'password', 'nama_outlet', 'alamat_outlet', 'kota', 'foto_outlet', 'timestamp'];
 //protected $useTimestamps = true;
 //    protected $createdField  = 'created_at';
 //    protected $updatedField  = 'updated_at';
@@ -65,6 +65,14 @@ class SuperadmModel extends Model {
         $builder = $this->builder();
         // insert data
         return $builder->insert($data);
+    }
+    
+    // delete data by ID
+    public function delOutlet($no) {
+        // tentukan tabel
+        $builder = $this->builder();
+        $builder->where('id_outlet', $no);
+        return $builder->delete();
     }
 
     // kosongkan data upload

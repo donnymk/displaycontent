@@ -37,6 +37,9 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Superadmin::index');
 $routes->post('input_outlet', 'Superadmin::insert_outlet');
+$routes->get('del_outlet/(:num)', 'Superadmin::delete_outlet/$1');
+$routes->get('logout_sa', 'Superadmin::logout_superadmin');
+$routes->get('formlogin_sa', 'Superadmin::formlogin_superadmin');
 
 /*
  * --------------------------------------------------------------------
