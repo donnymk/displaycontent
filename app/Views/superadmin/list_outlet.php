@@ -41,16 +41,16 @@
                                                         </div>-->
                         </div>
                     </li>
-                    <li class="xn-title">Navigation</li>
+                    <li class="xn-title">Outlet</li>
                     <li>
                         <a href="index.html"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
                     </li>
                     <li class="active">
-                        <a href="pages-address-book.html"><span class="fa fa-users"></span> Daftar Outlet</a>
+                        <a href="pages-address-book.html"><span class="fa fa-map-marker"></span> Daftar Outlet</a>
                     </li>
-                    <li class="xn-title">Other categories</li>
+                    <li class="xn-title">Client & content</li>
                     <li>
-                        <a href="maps.html"><span class="fa fa-map-marker"></span> <span class="xn-text">Menu others</span></a>
+                        <a href="maps.html"><span class="fa fa-users"></span> <span class="xn-text">Daftar client & content</span></a>
                     </li>
 
                 </ul>
@@ -102,6 +102,15 @@
                                 <div class="alert alert-success" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                     <?= $session->getFlashdata('inputOutletStatus') ?>
+                                </div>
+                                <?php
+                            }
+                            // cek flash data untuk memberitahu status reset password outlet
+                            if (isset($_SESSION['resetPasswOutletStatus'])) {
+                                ?>
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <?= $session->getFlashdata('resetPasswOutletStatus') ?>
                                 </div>
                                 <?php
                             }

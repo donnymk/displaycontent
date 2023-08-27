@@ -16,13 +16,13 @@
     </head>
     <body>
 
-        <div class="login-container">
+        <div class="login-container lightmode">
 
             <div class="login-box animated fadeInDown">
                 <!--<div class="login-logo"></div>-->
                 <h1 style="color: white; text-align: center">Display Content</h1>
                 <div class="login-body">
-                    <div class="login-title"><strong>Halo Superadmin</strong>, silahkan login</div>
+                    <div class="login-title"><strong>Admin Outlet</strong> login</div>
                     <?php
                     // tampilkan flash data jika login gagal
                     if (isset($_SESSION['loginGagal'])) {
@@ -34,7 +34,7 @@
                         <?php
                     }
                     ?>
-                    <?= form_open(base_url('public/login_sa'), 'class="form-horizontal"') ?>
+                    <?= form_open(base_url('public/login_ao'), 'class="form-horizontal"') ?>
                     <div class="form-group">
                         <div class="col-md-12">
                             <input type="text" class="form-control" name="username" placeholder="Username" required=""/>
@@ -53,10 +53,6 @@
                     <?= form_close() ?>
                 </div>
                 <div class="login-footer">
-                    <div class="pull-left">
-                        <a href="<?= base_url('public/formlogin_ao') ?>" target="_blank">Halaman admin outlet</a> |
-                        <a href="<?= base_url('public/formlogin_c') ?>" target="_blank">Halaman client</a>
-                    </div>
                     <div class="pull-right">
                         &copy; 2023 <a href="mailto:bossdony@gmail.com">donnymk</a>
                     </div>

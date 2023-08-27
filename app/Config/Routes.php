@@ -39,7 +39,11 @@ $routes->get('/', 'Superadmin::index');
 $routes->post('input_outlet', 'Superadmin::insert_outlet');
 $routes->get('del_outlet/(:num)', 'Superadmin::delete_outlet/$1');
 $routes->get('logout_sa', 'Superadmin::logout_superadmin');
-$routes->get('formlogin_sa', 'Superadmin::formlogin_superadmin');
+$routes->get('formlogin_sa', 'SuperadminAuth::formlogin_superadmin');
+$routes->get('formlogin_ao', 'AdminOutletAuth::formlogin_adminoutlet');
+$routes->get('formlogin_c', 'ClientAuth::formlogin_client');
+$routes->post('login_sa', 'SuperadminAuth::login_superadmin');
+$routes->get('reset_passw_outlet/(:num)', 'Superadmin::resetpassw_outlet/$1');
 
 /*
  * --------------------------------------------------------------------

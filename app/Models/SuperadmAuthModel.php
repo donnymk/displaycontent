@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AuthModel extends Model {
+class SuperadmAuthModel extends Model {
 
 //protected $DBGroup = 'default';
 
-    protected $table = 'auth';
-    protected $primaryKey = 'id_user';
+    protected $table = 'superadmin';
+    protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     //protected $useSoftDeletes = true;
-    protected $allowedFields = ['username', 'password', 'role'];
+    protected $allowedFields = ['username', 'password', 'nama_superadmin'];
 //protected $useTimestamps = true;
 //    protected $createdField  = 'created_at';
 //    protected $updatedField  = 'updated_at';
@@ -23,8 +23,8 @@ class AuthModel extends Model {
     protected $validationMessages = [];
     protected $skipValidation = false;
 
-    // cek username
-    public function authAdmin($username) {
+    // cek username superadmin
+    public function authSuperadmin($username) {
         $builder = $this->builder();
         $builder->where('username', $username);
         $query = $builder->get();

@@ -23,33 +23,9 @@ class SuperadmModel extends Model {
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
+    
 
-    // get difference of the time zone from database server
-    public function getTimeDiff() {
-        // not using the query builder because on PHP 8 it doesn't work
-        //$builder = $this->builder();
-        //$query = $builder->get();
-        
-        $db = db_connect();
-        $query = $db->query('SELECT timediff(now(),convert_tz(now(),@@session.time_zone,\'+00:00\')) AS time_diff');
-        return $query;
-    }
-
-    // get all data upload including including converted timezone from timestamp
-//    public function getDataUpload($from_timezone, $to_timezone) {
-//        // tampilkan menggunakan query builder
-//        $builder = $this->builder();
-//
-//        // use raw sql
-//        $sql = 'nama_file_ori, lokasi, DATE_FORMAT(CONVERT_TZ(timestamp,\'' . $from_timezone . '\',\'' . $to_timezone . '\'), \'%d %b %Y %H:%i:%s\') AS converted_time';
-//        $builder->select(new RawSql($sql));
-//        $builder->orderBy('timestamp', 'DESC');
-//        //return $builder->getCompiledSelect();
-//        $query = $builder->get();
-//        return $query;
-//    }
-
-    // get all data upload
+    // get all admin outlet
     public function getAdminOutlet() {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
@@ -58,8 +34,18 @@ class SuperadmModel extends Model {
         $query = $builder->get();
         return $query;
     }
+    
+    // get admin outlet by ID
+    public function getAdminOutletById($id_outlet) {
+        // tampilkan menggunakan query builder
+        $builder = $this->builder();
 
-    // insert data
+        $builder->where('id_outlet', $id_outlet);
+        $query = $builder->get();
+        return $query;
+    }
+
+    // insert data outlet
     public function insertOutlet($data) {
         // tentukan tabel
         $builder = $this->builder();
@@ -73,6 +59,15 @@ class SuperadmModel extends Model {
         $builder = $this->builder();
         $builder->where('id_outlet', $no);
         return $builder->delete();
+    }
+    
+    // reset password admin outlet
+    public function resetPassword($id_outlet, $newPasswordHash) {
+        $builder = $this->builder();
+        $builder->set('password', $newPasswordHash);
+        $builder->where('id_outlet', $id_outlet);
+        $query = $builder->update();
+        return $query;
     }
 
     // kosongkan data upload
