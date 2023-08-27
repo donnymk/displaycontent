@@ -53,8 +53,8 @@
                     <?= form_close() ?>
                 </div>
                 <div class="login-footer">
-                    <div class="pull-right">
-                        &copy; 2023 <a href="mailto:bossdony@gmail.com">donnymk</a>
+                    <div class="pull-right" style="font-size: smaller">
+                        &copy; 2023 Made with <span class="fa fa-coffee"></span> by <a href="mailto:bossdony@gmail.com">donnymk</a>
                     </div>
                 </div>
             </div>

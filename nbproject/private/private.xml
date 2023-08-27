@@ -6,7 +6,11 @@
             <file>file:/D:/Git%20Repository/displaycontent/app/Views/superadmin/login_sa.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Config/Routes.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/Superadmin.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Models/SuperadmAuthModel.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/AdminOutletAuth.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Views/adminoutlet/login_ao.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Views/superadmin/list_outlet.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/SuperadminAuth.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Models/SuperadmModel.php</file>
         </group>
     </open-files>
