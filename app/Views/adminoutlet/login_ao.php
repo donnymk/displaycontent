@@ -37,12 +37,12 @@
                     <?= form_open(base_url('public/login_ao'), 'class="form-horizontal"') ?>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required=""/>
+                            <input type="text" class="form-control" name="username_ao" placeholder="Username" required=""/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+                            <input type="password" class="form-control" name="password_ao" placeholder="Password" required=""/>
                         </div>
                     </div>
                     <div class="form-group">

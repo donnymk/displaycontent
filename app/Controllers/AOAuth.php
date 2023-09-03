@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\SuperadmAuthModel;
+use App\Models\AOAuthModel;
 
-class AdminOutletAuth extends BaseController {
+// class bagi Admin Outlet sebelum login dan sampai proses login
+class AOAuth extends BaseController {
 
     public function index() {
         // initialize the session
@@ -41,26 +42,30 @@ class AdminOutletAuth extends BaseController {
         
         return view('adminoutlet/login_ao', $data);
     }    
-    // proses login superadmin
-    public function login_superadmin() {
+    // proses login admin outlet
+    public function login_adminoutlet() {
         // initialize the session
         $session = \Config\Services::session();
 
         // terima data dari form input
-        $inputUsername = $this->request->getPost('username');
-        $inputPassword = $this->request->getPost('password');
+        $inputUsername = $this->request->getPost('username_ao');
+        $inputPassword = $this->request->getPost('password_ao');
 
         // default password db = null karena belum dilakukan query database
         $password_db = null;
 
         // QUERY MELALUI MODEL
-        $model = new SuperadmAuthModel();
-        $select_sa = $model->authSuperadmin($inputUsername);
+        $model = new AOAuthModel();
+        $select_ao = $model->authAO($inputUsername);
 
         // jika data ditemukan
-        foreach ($select_sa as $value):
+        foreach ($select_ao as $value):
             $password_db = $value->password;
-            $nama_superadmin = $value->nama_superadmin;
+            $id_outlet = $value->id_outlet;
+            $nama_outlet = $value->nama_outlet;
+            $alamat_outlet = $value->alamat_outlet;
+            $kota = $value->kota;
+            $foto_outlet = $value->foto_outlet;
         endforeach;
         //var_dump(password_verify($inputPassword, $password_db));
         //exit();
@@ -69,22 +74,26 @@ class AdminOutletAuth extends BaseController {
         if (password_verify($inputPassword, $password_db)) {
             $newdata = [
                 'username' => $inputUsername,
-                'role' => 'Superadmin',
-                'nama_superadmin' => $nama_superadmin,
-                'logged_in' => true
+                'role' => 'Admin Outlet',
+                'nama_outlet' => $nama_outlet,
+                'logged_in' => true,
+                'id_outlet' => $id_outlet, 
+                'alamat_outlet' => $alamat_outlet,
+                'kota' => $kota,
+                'foto_outlet' => $foto_outlet
             ];
             $session->set($newdata);
 
             session_write_close();
 
             // Go to specific URI
-            return redirect()->to(base_url('public/'));
+            return redirect()->to(base_url('public/home_ao'));
         }
         // jika password salah
         else {
             $session->setFlashdata('loginGagal', 'Username atau Password salah');
             // Go to specific URI
-            return redirect()->to(base_url('public/formlogin_sa'));
+            return redirect()->to(base_url('public/formlogin_ao'));
         }
     }
 
