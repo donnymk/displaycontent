@@ -57,6 +57,30 @@ class AO extends BaseController {
 
         return view('adminoutlet/home_ao', $data);
     }
+    
+    // halaman kelola konten oleh admin outlet
+    public function konten_ao() {
+        // initialize the session
+        $session = \Config\Services::session();
+
+        // load the form helper
+        //helper('form');
+
+        // default value
+        //$data['username'] = null;
+        // cek session login
+        if ($session->has('username')) {
+            $id_outlet = $session->id_outlet;
+            $data['session'] = $session;
+        }
+        //var_dump($session); exit();
+        // QUERY MELALUI MODEL
+        $model = new AOModel();
+        $data['count_content'] = $model->countContentById($id_outlet)->getResult();
+        $data['session'] = $session;
+
+        return view('adminoutlet/kelolakonten_ao', $data);
+    }
 
     public function insert_outlet() {
         // initialize the session

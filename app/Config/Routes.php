@@ -43,8 +43,11 @@ $routes->get('formlogin_sa', 'SuperadminAuth::formlogin_superadmin');
 $routes->get('formlogin_ao', 'AOAuth::formlogin_adminoutlet');
 $routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 $routes->post('login_sa', 'SuperadminAuth::login_superadmin');
+
 $routes->post('login_ao', 'AOAuth::login_adminoutlet');
 $routes->get('home_ao', 'AO::index');
+$routes->get('konten_ao', 'AO::konten_ao');
+
 $routes->get('reset_passw_outlet/(:num)', 'Superadmin::resetpassw_outlet/$1');
 
 /*
