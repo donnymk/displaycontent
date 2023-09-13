@@ -105,90 +105,115 @@ foreach ($count_content as $key => $value) {
                 <div class="page-content-wrap">
 
                     <div class="row">
-                        <!-- PROFIL ADMIN OUTLET -->
-                        <div class="col-md-3">
+                        <div class="col-md-12">
+
+                            <!-- START DEFAULT DATATABLE -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Profil Outlet</h3>
+                                    <h3 class="panel-title">Daftar konten</h3>
+                                    <!--                                    <ul class="panel-controls">
+                                                                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                                                            <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                                                        </ul>                                -->
                                 </div>
                                 <div class="panel-body">
-                                    <h6>Nama Outlet</h6>
-                                    <p><?= $session->nama_outlet ?></p>
-                                    <h6>Alamat</h6>
-                                    <p><?= $session->alamat_outlet ?></p>
-                                    <h6>Kota</h6>
-                                    <p><?= $session->kota ?></p>
-                                    <h6>Level</h6>
-                                    <p><mark>Admin Outlet</mark></p>
-                                    <h6>Username</h6>
-                                    <p><mark><?= $session->username ?></mark></p>
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#modal_basic">
+                                        <span class="fa fa-plus"></span> Tambah konten
+                                    </button>
+                                    <br><br>
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Jenis content</th>
+                                                <th>Screen orientation</th>
+                                                <th>Nama content</th>
+                                                <th>Status</th>
+                                                <th>Ditambahkan</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                                <td>$320,800</td>
+                                                <th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                            <!-- END DEFAULT DATATABLE -->
                         </div>
-                        <!-- END PROFIL ADMIN OUTLET -->
-                        
-                        <!-- START WIDGET -->
-                        <div class="col-md-3">
-                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
-                                <div class="widget-item-left">
-                                    <span class="fa fa-play-circle"></span>
-                                </div>
-                                <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countAll ?></div>
-                                    <div class="widget-title">Jumlah konten</div>
-                                    <div class="widget-subtitle">Aktif dan tidak aktif</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
-                                <div class="widget-item-left">
-                                    <span class="fa fa-play-circle-o"></span>
-                                </div>
-                                <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countActive ?></div>
-                                    <div class="widget-title">Jumlah konten</div>
-                                    <div class="widget-subtitle">Aktif</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
-                                <div class="widget-item-left">
-                                    <span class="fa fa-picture-o"></span>
-                                </div>
-                                <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countImage ?></div>
-                                    <div class="widget-title">Konten gambar</div>
-                                    <div class="widget-subtitle"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
-                                <div class="widget-item-left">
-                                    <span class="fa fa-video-camera"></span>
-                                </div>
-                                <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countVideo ?></div>
-                                    <div class="widget-title">Konten video</div>
-                                    <div class="widget-subtitle"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END WIDGET -->
                     </div>
 
                 </div>
+
                 <!-- END PAGE CONTENT WRAPPER -->
             </div>
             <!-- END PAGE CONTENT -->
         </div>
         <!-- END PAGE CONTAINER -->
+
+        <!-- MODALS -->
+        <div class="modal" id="modal_basic" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <?= form_open(base_url('public/input_outlet'), 'class="form-horizontal"') ?>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="defModalHead">Tambah Konten</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Jenis konten</label>
+                            <div class="col-md-6 col-xs-12">
+                                <select class="form-control select">
+                                    <option value="Video">Video</option>
+                                    <option value="Gambar">Gambar</option>
+                                </select>
+                                <span class="help-block">Jenis konten</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Screen orientation</label>
+                            <div class="col-md-6 col-xs-12">
+                                <select class="form-control select">
+                                    <option value="landscape">Lanscape</option>
+                                    <option value="portrait">Portrait</option>
+                                </select>
+                                <span class="help-block">Orientasi layar sesuai konten dan perangkat</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Nama konten</label>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                    <input type="text" class="form-control"/>
+                                </div>
+                                <!--<span class="help-block">Nama konten</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">File konten</label>
+                            <div class="col-md-6 col-xs-12">
+                                <input type="file" class="fileinput btn-primary" name="filename" id="filename" title="Browse file"/>
+                                <!--<span class="help-block">Input type file</span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    <?= form_close() ?>
+                </div>
+            </div>
+        </div>
 
         <!-- MESSAGE BOX-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
@@ -225,6 +250,13 @@ foreach ($count_content as $key => $value) {
         <!-- THIS PAGE PLUGINS -->
         <script type='text/javascript' src='<?= base_url() ?>/js/plugins/icheck/icheck.min.js'></script>
         <script type="text/javascript" src="<?= base_url() ?>/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/bootstrap/bootstrap-select.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+
+        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/datatables/jquery.dataTables.min.js"></script>
         <!-- END PAGE PLUGINS -->
 
         <!-- START TEMPLATE -->

@@ -64,7 +64,7 @@ class AO extends BaseController {
         $session = \Config\Services::session();
 
         // load the form helper
-        //helper('form');
+        helper('form');
 
         // default value
         //$data['username'] = null;
