@@ -1,11 +1,3 @@
-<?php
-foreach ($count_content as $key => $value) {
-    $countAll = $value->countAll;
-    $countActive = $value->countActive;
-    $countImage = $value->countImage;
-    $countVideo = $value->countVideo;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -128,21 +120,33 @@ foreach ($count_content as $key => $value) {
                                                 <th>Jenis content</th>
                                                 <th>Screen orientation</th>
                                                 <th>Nama content</th>
+                                                <th>Content</th>
                                                 <th>Status</th>
                                                 <th>Ditambahkan</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                            $no = 0;
+                                            // tampilkan data konten
+                                            foreach ($content as $key => $value) {
+                                                $no++;
+                                            ?>
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                                <th>
+                                                <td><?= $no ?></td>
+                                                <td><?= $value->jenis_content ?></td>
+                                                <td><?= $value->screen_orientation ?></td>
+                                                <td><?= $value->nama_content ?></td>
+                                                <td><?= $value->data ?></td>
+                                                <td><?= $value->aktif ?></td>
+                                                <td><?= $value->timestamp ?></td>
+                                                <td></td>
                                             </tr>
+                                            <?php
+                                            }
+                                            ?>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -163,7 +167,7 @@ foreach ($count_content as $key => $value) {
         <div class="modal" id="modal_basic" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <?= form_open(base_url('public/input_outlet'), 'class="form-horizontal"') ?>
+                    <?= form_open_multipart(base_url('public/input_konten'), 'class="form-horizontal"') ?>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" id="defModalHead">Tambah Konten</h4>
@@ -172,17 +176,18 @@ foreach ($count_content as $key => $value) {
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Jenis konten</label>
                             <div class="col-md-6 col-xs-12">
-                                <select class="form-control select">
-                                    <option value="Video">Video</option>
-                                    <option value="Gambar">Gambar</option>
+                                <select name="jenisKonten" class="form-control select" required="">
+                                    <option value="">--- Pilih ---</option>
+                                    <option value="gambar">Gambar</option>
+                                    <option value="video">Video</option>
                                 </select>
-                                <span class="help-block">Jenis konten</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Screen orientation</label>
+                            <label class="col-md-3 col-xs-12 control-label">Orientasi layar</label>
                             <div class="col-md-6 col-xs-12">
-                                <select class="form-control select">
+                                <select name="screenOrientation" class="form-control select" required="">
+                                    <option value="">--- Pilih ---</option>
                                     <option value="landscape">Lanscape</option>
                                     <option value="portrait">Portrait</option>
                                 </select>
@@ -194,7 +199,7 @@ foreach ($count_content as $key => $value) {
                             <div class="col-md-6 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                    <input type="text" class="form-control"/>
+                                    <input name="namaKonten" type="text" class="form-control" required=""/>
                                 </div>
                                 <!--<span class="help-block">Nama konten</span>-->
                             </div>
@@ -202,13 +207,14 @@ foreach ($count_content as $key => $value) {
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">File konten</label>
                             <div class="col-md-6 col-xs-12">
-                                <input type="file" class="fileinput btn-primary" name="filename" id="filename" title="Browse file"/>
+                                <input type="file" class="fileinput btn-primary" name="konten" id="konten" title="Browse file" required=""/>
                                 <!--<span class="help-block">Input type file</span>-->
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-primary pull-right">Tambahkan</button>
                     </div>
                     <?= form_close() ?>
                 </div>

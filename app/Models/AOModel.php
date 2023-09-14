@@ -27,17 +27,18 @@ class AOModel extends Model {
     protected $skipValidation = false;
     
 
-    // get all admin outlet
-    public function getAdminOutlet() {
+    // get content by ID outlet
+    public function getContentByOutlet() {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
 
+        $builder->select('jenis_content, screen_orientation, nama_content, data, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
         //return $builder->getCompiledSelect();
         $query = $builder->get();
         return $query;
     }
     
-    // count content by ID
+    // count content by ID outlet
     public function countContentById($id_outlet) {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
@@ -48,8 +49,8 @@ class AOModel extends Model {
         return $query;
     }
 
-    // insert data outlet
-    public function insertOutlet($data) {
+    // insert data konten
+    public function insertContent($data) {
         // tentukan tabel
         $builder = $this->builder();
         // insert data

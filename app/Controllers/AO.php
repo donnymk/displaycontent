@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-//use App\Models\SuperadmModel;
 use App\Models\AOModel;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -76,79 +75,79 @@ class AO extends BaseController {
         //var_dump($session); exit();
         // QUERY MELALUI MODEL
         $model = new AOModel();
-        $data['count_content'] = $model->countContentById($id_outlet)->getResult();
+        $data['content'] = $model->getContentByOutlet($id_outlet)->getResult();
         $data['session'] = $session;
 
         return view('adminoutlet/kelolakonten_ao', $data);
     }
 
-    public function insert_outlet() {
+    // insert konten
+    public function insert_konten() {
         // initialize the session
         $session = \Config\Services::session();
 
         // terima data dari form input
-        $namaOutlet = $this->request->getPost('namaOutlet');
-        $alamatOutlet = $this->request->getPost('alamatOutlet');
-        $kotaOutlet = $this->request->getPost('kotaOutlet');
-        $usernameOutlet = $this->request->getPost('usernameOutlet');
-        $passwordOutlet = $this->request->getPost('passwordOutlet');
-        $fotoOutlet = $this->request->getFile('fotoOutlet');
+        $jenisKonten = $this->request->getPost('jenisKonten');
+        $screenOrientation = $this->request->getPost('screenOrientation');
+        $namaKonten = $this->request->getPost('namaKonten');
+        $konten = $this->request->getFile('konten');
+        //var_dump($jenisKonten);        exit();
 
-        // aturan file upload (salah satunya tidak wajib diupload)
-        $validationRule = [
-            'fotoOutlet' => [
-                'label' => 'Image File',
-                'rules' => [
-                    //'uploaded[fotoOutlet]',
-                    'is_image[fotoOutlet]',
-                    'mime_in[fotoOutlet,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
-                    'max_size[fotoOutlet,2000]',
-                    'max_dims[fotoOutlet,8000,6000]',
-                ],
-            ]
-        ];
+        // aturan file upload (salah satunya wajib diupload)
+        if($jenisKonten == 'gambar'){
+            $validationRule = [
+                'konten' => [
+                    'label' => 'Image File',
+                    'rules' => [
+                        'uploaded[konten]',
+                        'is_image[konten]',
+                        'mime_in[konten,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+                        'max_size[konten,2000]',
+                        'max_dims[konten,8000,6000]',
+                    ],
+                ]
+            ];            
+        }
+        elseif($jenisKonten == 'video'){
+            $validationRule = [
+                'konten' => [
+                    'label' => 'Video File',
+                    'rules' => [
+                        'uploaded[konten]',
+                    ],
+                ]
+            ];    
+        }
+
         // jika yang diupload tidak sesuai rule
         if (!$this->validate($validationRule)) {
             $errors = $this->validator->getErrors();
             return var_dump($errors);
         }
-
-        // JIKA FILE TIDAK DIUPLOAD = ERROR CODE 4
-        //
-        // jika foto tidak diupload
-        if ($fotoOutlet->getError() == 4) {
-            $nama_foto = '';
-        }
-        // jika foto outlet berhasil diupload dan masih ada di temporary folder
-        elseif (!$fotoOutlet->hasMoved()) {
-            $nama_foto = $fotoOutlet->getRandomName();
-            $fotoOutlet->move('uploads/', $nama_foto);
+        // jika konten berhasil diupload dan masih ada di temporary folder
+        if (!$konten->hasMoved()) {
+            $content_name = $konten->getRandomName();
+            $konten->move('uploads/contents/', $content_name);
         }
 
-        // enkripsi password
-        $options = [
-            'cost' => 10,
-        ];
-        $password_hash = password_hash($passwordOutlet, PASSWORD_DEFAULT, $options);
-
-        $data_outlet = [
-            'username' => $usernameOutlet,
-            'password' => $password_hash,
-            'nama_outlet' => $namaOutlet,
-            'alamat_outlet' => $alamatOutlet,
-            'kota' => $kotaOutlet,
-            'foto_outlet' => $nama_foto
+        $data_konten = [
+            'jenis_content' => $jenisKonten,
+            'screen_orientation' => $screenOrientation,
+            'nama_content' => $namaKonten,
+            'data' => $content_name,
+            'id_outlet' => $session->id_outlet,
+            'aktif' => 1
         ];
 
         // QUERY MELALUI MODEL
-        $model = new SuperadmModel();
-        $insert = $model->insertOutlet($data_outlet);
-        //var_dump($data_outlet); exit();
+        $model = new AOModel();
+        $insert = $model->insertContent($data_konten);
+        //var_dump($data_konten); exit();
         if ($insert) {
             // set flash data
-            $session->setFlashdata('inputOutletStatus', 'Outlet berhasil ditambahkan.');
+            $session->setFlashdata('inputKontenStatus', 'Konten berhasil ditambahkan.');
             // Go to specific URI
-            return redirect()->to(base_url('public'));
+            return redirect()->to(base_url('public/konten_ao'));
         }
 
         $errors = 'The file has already been moved.';
