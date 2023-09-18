@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Controllers/Superadmin.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Views/adminoutlet/kelolakonten_ao.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Models/AOModel.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Models/SuperadmModel.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Views/superadmin/list_outlet.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Models/AOAuthModel.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Controllers/AOAuth.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Controllers/AO.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Views/adminoutlet/home_ao.php</file>
-            <file>file:/D:/Git%20Repo/displaycontent/app/Config/Routes.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Config/Routes.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/AO.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Views/adminoutlet/kelolakonten_ao.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Models/AOModel.php</file>
         </group>
     </open-files>
 </project-private>

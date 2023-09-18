@@ -13,6 +13,9 @@
         <!-- CSS INCLUDE -->
         <link rel="stylesheet" type="text/css" id="theme" href="<?= base_url() ?>/css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->
+
+        <!-- video.js -->
+        <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -132,23 +135,43 @@
                                             // tampilkan data konten
                                             foreach ($content as $key => $value) {
                                                 $no++;
-                                            ?>
-                                            <tr>
-                                                <td><?= $no ?></td>
-                                                <td><?= $value->jenis_content ?></td>
-                                                <td><?= $value->screen_orientation ?></td>
-                                                <td><?= $value->nama_content ?></td>
-                                                <td><?= $value->data ?></td>
-                                                <td><?= $value->aktif ?></td>
-                                                <td><?= $value->timestamp ?></td>
-                                                <td></td>
-                                            </tr>
-                                            <?php
+                                                ?>
+                                                <tr>
+                                                    <td><?= $no ?></td>
+                                                    <td><?= $value->jenis_content ?></td>
+                                                    <td><?= $value->screen_orientation ?></td>
+                                                    <td><?= $value->nama_content ?></td>
+                                                    <td><?= $value->data ?></td>
+                                                    <td><?= $value->aktif ?></td>
+                                                    <td><?= $value->timestamp ?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <?php
                                             }
                                             ?>
 
                                         </tbody>
                                     </table>
+
+                                    <video
+                                        id="my-video"
+                                        class="video-js"
+                                        controls
+                                        preload="auto"
+                                        width="640"
+                                        height="264"
+                                        poster="MY_VIDEO_POSTER.jpg"
+                                        data-setup="{}"
+                                        >
+                                        <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />
+                                        <p class="vjs-no-js">
+                                            To view this video please enable JavaScript, and consider upgrading to a
+                                            web browser that
+                                            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                               >supports HTML5 video</a
+                                            >
+                                        </p>
+                                    </video>
                                 </div>
                             </div>
                             <!-- END DEFAULT DATATABLE -->
@@ -271,6 +294,10 @@
         <script type="text/javascript" src="<?= base_url() ?>/js/plugins.js"></script>
         <script type="text/javascript" src="<?= base_url() ?>/js/actions.js"></script>
         <!-- END TEMPLATE -->
+
+        <!-- START video.js -->
+        <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+        <!-- END video.js -->
         <!-- END SCRIPTS -->
 
     </body>
