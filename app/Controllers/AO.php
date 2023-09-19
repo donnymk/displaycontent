@@ -77,7 +77,7 @@ class AO extends BaseController {
         $model = new AOModel();
         $data['content'] = $model->getContentByOutlet($id_outlet)->getResult();
         $data['session'] = $session;
-
+		
         return view('adminoutlet/kelolakonten_ao', $data);
     }
 

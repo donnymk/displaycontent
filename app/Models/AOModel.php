@@ -16,7 +16,7 @@ class AOModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     //protected $useSoftDeletes = true;
-    protected $allowedFields = ['jenis_content', 'screen_orientation', 'nama_content', 'data', 'aktif', 'timestamp'];
+    protected $allowedFields = ['id_content','jenis_content', 'screen_orientation', 'nama_content', 'data', 'aktif', 'timestamp'];
 //protected $useTimestamps = true;
 //    protected $createdField  = 'created_at';
 //    protected $updatedField  = 'updated_at';
@@ -28,11 +28,12 @@ class AOModel extends Model {
     
 
     // get content by ID outlet
-    public function getContentByOutlet() {
+    public function getContentByOutlet($id_outlet) {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
 
-        $builder->select('jenis_content, screen_orientation, nama_content, data, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
+        $builder->select('id_content, jenis_content, screen_orientation, nama_content, data, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
+		$builder->where('id_outlet', $id_outlet);
         //return $builder->getCompiledSelect();
         $query = $builder->get();
         return $query;

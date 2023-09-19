@@ -144,7 +144,7 @@
                                                     <td><?= $value->data ?></td>
                                                     <td><?= $value->aktif ?></td>
                                                     <td><?= $value->timestamp ?></td>
-                                                    <td></td>
+                                                    <td><a href="<?= base_url('public/delkonten_ao/'.$value->id_content) ?>"><span class="fa fa-trash-o"></span></a></td>
                                                 </tr>
                                                 <?php
                                             }
