@@ -48,6 +48,7 @@ $routes->post('login_ao', 'AOAuth::login_adminoutlet');
 $routes->get('home_ao', 'AO::index');
 $routes->get('konten_ao', 'AO::konten_ao');
 $routes->post('input_konten', 'AO::insert_konten');
+$routes->get('delkonten_ao/(:num)', 'AO::delkonten/$1');
 
 $routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 

@@ -91,7 +91,7 @@ class AO extends BaseController {
         $screenOrientation = $this->request->getPost('screenOrientation');
         $namaKonten = $this->request->getPost('namaKonten');
         $konten = $this->request->getFile('konten');
-        //var_dump($jenisKonten);        exit();
+        var_dump($jenisKonten);        exit();
 
         // aturan file upload (salah satunya wajib diupload)
         if($jenisKonten == 'gambar'){
@@ -102,7 +102,7 @@ class AO extends BaseController {
                         'uploaded[konten]',
                         'is_image[konten]',
                         'mime_in[konten,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
-                        'max_size[konten,2000]',
+                        'max_size[konten,4000]',
                         'max_dims[konten,8000,6000]',
                     ],
                 ]
@@ -114,6 +114,7 @@ class AO extends BaseController {
                     'label' => 'Video File',
                     'rules' => [
                         'uploaded[konten]',
+                        'max_size[konten,16000]'
                     ],
                 ]
             ];    
@@ -177,6 +178,32 @@ class AO extends BaseController {
             $session->setFlashdata('delOutletStatus', 'Outlet berhasil dihapus.');
             // Go to specific URI
             return redirect()->to(base_url('public'));
+        }
+    }
+    
+    // delete data konten by ID
+    public function delkonten($id_konten) {
+        // initialize the session
+        $session = \Config\Services::session();
+
+        // QUERY MELALUI MODEL
+        $model = new AOModel();
+        //get data admin outlet
+        $data_konten = $model->getContentByID($id_konten)->getResult();
+        $konten = $data_konten[0]->data;
+        
+        // cek file, jika ada hapus
+        if (file_exists('uploads/contents/' . $konten) && is_file('uploads/contents/' . $konten)) {
+            unlink('uploads/contents/' . $konten);
+        }
+        // hapus file dari database
+        $del = $model->delKonten($id_konten);
+
+        if ($del) {
+            // set flash data
+            $session->setFlashdata('delKontenStatus', 'Konten berhasil dihapus.');
+            // Go to specific URI
+            return redirect()->to(base_url('public/konten_ao'));
         }
     }
 

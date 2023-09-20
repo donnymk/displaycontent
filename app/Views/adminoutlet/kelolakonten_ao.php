@@ -101,7 +101,26 @@
 
                     <div class="row">
                         <div class="col-md-12">
-
+                            <?php
+                            // cek flash data untuk memberitahu status input konten
+                            if (isset($_SESSION['inputKontenStatus'])) {
+                                ?>
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <?= $session->getFlashdata('inputKontenStatus') ?>
+                                </div>
+                                <?php
+                            }
+                            // cek flash data untuk memberitahu status delete konten
+                            if (isset($_SESSION['delKontenStatus'])) {
+                                ?>
+                                <div class="alert alert-default" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <?= $session->getFlashdata('delKontenStatus') ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <!-- START DEFAULT DATATABLE -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -144,7 +163,11 @@
                                                     <td><?= $value->data ?></td>
                                                     <td><?= $value->aktif ?></td>
                                                     <td><?= $value->timestamp ?></td>
-                                                    <td><a href="<?= base_url('public/delkonten_ao/'.$value->id_content) ?>"><span class="fa fa-trash-o"></span></a></td>
+                                                    <td>
+                                                        <a href="<?= base_url('public/delkonten_ao/'.$value->id_content) ?>" onclick="return confirm('Yakin hapus konten <?= $value->nama_content ?>?')">
+                                                            <span class="fa fa-trash-o"></span>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <?php
                                             }
@@ -160,7 +183,6 @@
                                         preload="auto"
                                         width="640"
                                         height="264"
-                                        poster="MY_VIDEO_POSTER.jpg"
                                         data-setup="{}"
                                         >
                                         <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />

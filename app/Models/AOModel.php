@@ -39,6 +39,16 @@ class AOModel extends Model {
         return $query;
     }
     
+    // get content by ID konten
+    public function getContentByID($id_konten) {
+        // tampilkan menggunakan query builder
+        $builder = $this->builder();
+		$builder->where('id_content', $id_konten);
+        //return $builder->getCompiledSelect();
+        $query = $builder->get();
+        return $query;
+    }
+    
     // count content by ID outlet
     public function countContentById($id_outlet) {
         // tampilkan menggunakan query builder
@@ -58,11 +68,11 @@ class AOModel extends Model {
         return $builder->insert($data);
     }
     
-    // delete data by ID
-    public function delOutlet($no) {
+    // delete konten by ID
+    public function delKonten($id_konten) {
         // tentukan tabel
         $builder = $this->builder();
-        $builder->where('id_outlet', $no);
+        $builder->where('id_content', $id_konten);
         return $builder->delete();
     }
 
