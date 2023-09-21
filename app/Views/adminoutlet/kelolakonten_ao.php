@@ -134,6 +134,9 @@
                                     <button class="btn btn-info" data-toggle="modal" data-target="#modal_basic">
                                         <span class="fa fa-plus"></span> Tambah konten
                                     </button>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal_playall">
+                                        <span class="fa fa-play"></span> Play all active content
+                                    </button>
                                     <br><br>
                                     <table class="table datatable">
                                         <thead>
@@ -194,6 +197,7 @@
         <!-- END PAGE CONTAINER -->
 
         <!-- MODALS -->
+        <!--Modal tambah konten-->
         <div class="modal" id="modal_basic" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -251,6 +255,7 @@
             </div>
         </div>
 
+        <!--Modal play single konten-->
         <div class="modal" id="modal_play" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -264,6 +269,42 @@
                             class="video-js"
                             controls
                             loop="loop"
+                            preload="auto"
+                            width="640"
+                            height="360"
+                            data-setup="{}"
+                            >
+                            <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a
+                                web browser that
+                                <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                   >supports HTML5 video</a
+                                >
+                            </p>
+                        </video>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Modal play all konten-->
+        <div class="modal" id="modal_playall" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="defModalHead">Play All Active Content</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center">
+                        <h5>Currently playing: <span id="current-content-name"></span></h5>
+                        <video
+                            id="all-video"
+                            class="video-js"
+                            controls
                             preload="auto"
                             width="640"
                             height="360"
