@@ -91,7 +91,7 @@ class AO extends BaseController {
         $screenOrientation = $this->request->getPost('screenOrientation');
         $namaKonten = $this->request->getPost('namaKonten');
         $konten = $this->request->getFile('konten');
-        var_dump($jenisKonten);        exit();
+        //var_dump($jenisKonten);        exit();
 
         // aturan file upload (salah satunya wajib diupload)
         if($jenisKonten == 'gambar'){
@@ -114,7 +114,7 @@ class AO extends BaseController {
                     'label' => 'Video File',
                     'rules' => [
                         'uploaded[konten]',
-                        'max_size[konten,16000]'
+                        'max_size[konten,32000]'
                     ],
                 ]
             ];    

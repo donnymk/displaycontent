@@ -160,11 +160,15 @@
                                                     <td><?= $value->jenis_content ?></td>
                                                     <td><?= $value->screen_orientation ?></td>
                                                     <td><?= $value->nama_content ?></td>
-                                                    <td><?= $value->data ?></td>
+                                                    <td>
+                                                        <a href="" data-toggle="modal" data-target="#modal_play" onclick="return play_video('<?= $value->nama_content ?>','uploads/contents/<?= $value->data ?>')" title="Putar konten">
+                                                            <span class="fa fa-2x fa-play"></span>
+                                                        </a>
+                                                    </td>
                                                     <td><?= $value->aktif ?></td>
                                                     <td><?= $value->timestamp ?></td>
                                                     <td>
-                                                        <a href="<?= base_url('public/delkonten_ao/'.$value->id_content) ?>" onclick="return confirm('Yakin hapus konten <?= $value->nama_content ?>?')">
+                                                        <a href="<?= base_url('public/delkonten_ao/' . $value->id_content) ?>" onclick="return confirm('Yakin hapus konten <?= $value->nama_content ?>?')">
                                                             <span class="fa fa-trash-o"></span>
                                                         </a>
                                                     </td>
@@ -175,25 +179,6 @@
 
                                         </tbody>
                                     </table>
-
-                                    <video
-                                        id="my-video"
-                                        class="video-js"
-                                        controls
-                                        preload="auto"
-                                        width="640"
-                                        height="264"
-                                        data-setup="{}"
-                                        >
-                                        <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />
-                                        <p class="vjs-no-js">
-                                            To view this video please enable JavaScript, and consider upgrading to a
-                                            web browser that
-                                            <a href="https://videojs.com/html5-video-support/" target="_blank"
-                                               >supports HTML5 video</a
-                                            >
-                                        </p>
-                                    </video>
                                 </div>
                             </div>
                             <!-- END DEFAULT DATATABLE -->
@@ -259,9 +244,44 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button class="btn btn-primary pull-right">Tambahkan</button>
+                        <button type="submit" class="btn btn-primary pull-right">Tambahkan</button>
                     </div>
                     <?= form_close() ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal_play" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 id="content-name" class="modal-title" id="defModalHead">Play Konten</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center">                     
+                        <video
+                            id="my-video"
+                            class="video-js"
+                            controls
+                            loop="loop"
+                            preload="auto"
+                            width="640"
+                            height="360"
+                            data-setup="{}"
+                            >
+                            <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a
+                                web browser that
+                                <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                   >supports HTML5 video</a
+                                >
+                            </p>
+                        </video>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -319,6 +339,7 @@
 
         <!-- START video.js -->
         <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/js/video-settings.js"></script>
         <!-- END video.js -->
         <!-- END SCRIPTS -->
 
