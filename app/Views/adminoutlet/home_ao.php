@@ -196,13 +196,12 @@ foreach ($count_content as $key => $value) {
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
                     <div class="mb-content">
-                        <p>Are you sure you want to log out?</p>
-                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                         <p>Keluar dari Admin Outlet?</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
-                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                            <a href="<?= base_url() ?>/public/logout_ao" class="btn btn-success btn-lg">Ya</a>
+                            <button class="btn btn-default btn-lg mb-control-close">Tidak</button>
                         </div>
                     </div>
                 </div>

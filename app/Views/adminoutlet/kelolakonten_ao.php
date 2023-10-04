@@ -379,7 +379,10 @@
         <!-- END TEMPLATE -->
 
         <!-- START video.js -->
-        <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+        <!--<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>-->
+        <script src="<?= base_url() ?>/js/videojs/video.js" type="text/javascript"></script>
+        
+        <script src="<?= base_url() ?>/js/videojs/plugin.js" type="text/javascript"></script>
         <script type="text/javascript" src="<?= base_url() ?>/js/video-settings.js"></script>
         <!-- END video.js -->
         <!-- END SCRIPTS -->

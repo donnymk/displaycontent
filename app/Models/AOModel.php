@@ -16,7 +16,7 @@ class AOModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     //protected $useSoftDeletes = true;
-    protected $allowedFields = ['id_content','jenis_content', 'screen_orientation', 'nama_content', 'data', 'aktif', 'timestamp'];
+    protected $allowedFields = ['id_content','jenis_content', 'screen_orientation', 'nama_content', 'data', 'id_outlet', 'aktif', 'timestamp'];
 //protected $useTimestamps = true;
 //    protected $createdField  = 'created_at';
 //    protected $updatedField  = 'updated_at';
@@ -66,6 +66,7 @@ class AOModel extends Model {
         $builder = $this->builder();
         // insert data
         return $builder->insert($data);
+        //return $builder->getCompiledInsert();
     }
     
     // delete konten by ID

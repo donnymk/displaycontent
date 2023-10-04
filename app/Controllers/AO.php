@@ -94,37 +94,37 @@ class AO extends BaseController {
         //var_dump($jenisKonten);        exit();
 
         // aturan file upload (salah satunya wajib diupload)
-        if($jenisKonten == 'gambar'){
-            $validationRule = [
-                'konten' => [
-                    'label' => 'Image File',
-                    'rules' => [
-                        'uploaded[konten]',
-                        'is_image[konten]',
-                        'mime_in[konten,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
-                        'max_size[konten,4000]',
-                        'max_dims[konten,8000,6000]',
-                    ],
-                ]
-            ];            
-        }
-        elseif($jenisKonten == 'video'){
-            $validationRule = [
-                'konten' => [
-                    'label' => 'Video File',
-                    'rules' => [
-                        'uploaded[konten]',
-                        'max_size[konten,32000]'
-                    ],
-                ]
-            ];    
-        }
+//        if($jenisKonten == 'gambar'){
+//            $validationRule = [
+//                'konten' => [
+//                    'label' => 'Image File',
+//                    'rules' => [
+//                        'uploaded[konten]',
+//                        'is_image[konten]',
+//                        'mime_in[konten,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+//                        'max_size[konten,4000]',
+//                        'max_dims[konten,8000,6000]',
+//                    ],
+//                ]
+//            ];            
+//        }
+//        elseif($jenisKonten == 'video'){
+//            $validationRule = [
+//                'konten' => [
+//                    'label' => 'Video File',
+//                    'rules' => [
+//                        'uploaded[konten]',
+//                        'max_size[konten,32000]'
+//                    ],
+//                ]
+//            ];    
+//        }
 
         // jika yang diupload tidak sesuai rule
-        if (!$this->validate($validationRule)) {
-            $errors = $this->validator->getErrors();
-            return var_dump($errors);
-        }
+//        if (!$this->validate($validationRule)) {
+//            $errors = $this->validator->getErrors();
+//            return var_dump($errors);
+//        }
         // jika konten berhasil diupload dan masih ada di temporary folder
         if (!$konten->hasMoved()) {
             $content_name = $konten->getRandomName();
@@ -139,11 +139,12 @@ class AO extends BaseController {
             'id_outlet' => $session->id_outlet,
             'aktif' => 1
         ];
+        //var_dump($data_konten);        exit();
 
         // QUERY MELALUI MODEL
         $model = new AOModel();
         $insert = $model->insertContent($data_konten);
-        //var_dump($data_konten); exit();
+        //echo $insert;        exit();
         if ($insert) {
             // set flash data
             $session->setFlashdata('inputKontenStatus', 'Konten berhasil ditambahkan.');
@@ -234,14 +235,14 @@ class AO extends BaseController {
         return redirect()->to(base_url('public'));
     }
 
-    // keluar dari superadmin
-    public function logout_superadmin() {
+    // keluar dari admin outlet
+    public function logout_ao() {
         // initialize the session
         $session = \Config\Services::session();
         //$session->destroy();
-        $array_items = ['username', 'role', 'nama_superadmin', 'logged_in'];
+        $array_items = ['username', 'role', 'nama_outlet', 'logged_in', 'id_outlet', 'alamat_outlet', 'kota', 'foto_outlet'];
         $session->remove($array_items);
         // Go to specific URI
-        return redirect()->to(base_url('public/formlogin_sa'));
+        return redirect()->to(base_url('public/formlogin_ao'));
     }
 }
