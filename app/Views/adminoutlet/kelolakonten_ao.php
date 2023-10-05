@@ -15,7 +15,7 @@
         <!-- EOF CSS INCLUDE -->
 
         <!-- video.js -->
-        <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
+        <link href="<?= base_url() ?>/node_modules/video.js/dist/video-js.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -274,7 +274,7 @@
                             height="360"
                             data-setup="{}"
                             >
-                            <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />
+
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
@@ -310,7 +310,6 @@
                             height="360"
                             data-setup="{}"
                             >
-                            <source src="uploads/contents/1695046093_b757acfa039ba2d6784c.mp4" type="video/mp4" />
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
@@ -379,10 +378,8 @@
         <!-- END TEMPLATE -->
 
         <!-- START video.js -->
-        <!--<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>-->
-        <script src="<?= base_url() ?>/js/videojs/video.js" type="text/javascript"></script>
-        
-        <script src="<?= base_url() ?>/js/videojs/plugin.js" type="text/javascript"></script>
+        <script src="<?= base_url() ?>/node_modules/video.js/dist/video.js" type="text/javascript"></script>
+        <script src="<?= base_url() ?>/node_modules/videojs-playlist/dist/videojs-playlist.js" type="text/javascript"></script>
         <script type="text/javascript" src="<?= base_url() ?>/js/video-settings.js"></script>
         <!-- END video.js -->
         <!-- END SCRIPTS -->

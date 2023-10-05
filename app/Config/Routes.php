@@ -50,6 +50,7 @@ $routes->get('konten_ao', 'AO::konten_ao');
 $routes->post('input_konten', 'AO::insert_konten');
 $routes->get('delkonten_ao/(:num)', 'AO::delkonten/$1');
 $routes->get('logout_ao', 'AO::logout_ao');
+$routes->get('get_content_ao_ajax', 'AOAjax::get_content');
 
 $routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 
