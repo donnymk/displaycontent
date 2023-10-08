@@ -16,6 +16,22 @@
 
         <!-- video.js -->
         <link href="<?= base_url() ?>/node_modules/video.js/dist/video-js.css" rel="stylesheet" type="text/css"/>
+
+        <!--
+        Add some CSS rules to style the image element when it is in full screen mode
+        Use the :fullscreen pseudo-class selector to target the element in full screen mode
+        Set the width and height to 100% to fill the entire viewport
+        Set the object-fit property to contain to preserve the aspect ratio of the image
+        Set the object-position property to center to align the image in the center of the viewport
+        -->
+        <style>
+            #my-img:fullscreen {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+        </style>
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -138,50 +154,10 @@
                                         <span class="fa fa-play"></span> Play all active content
                                     </button>
                                     <br><br>
-                                    <table class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Jenis content</th>
-                                                <th>Screen orientation</th>
-                                                <th>Nama content</th>
-                                                <th>Content</th>
-                                                <th>Status</th>
-                                                <th>Ditambahkan</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $no = 0;
-                                            // tampilkan data konten
-                                            foreach ($content as $key => $value) {
-                                                $no++;
-                                                ?>
-                                                <tr>
-                                                    <td><?= $no ?></td>
-                                                    <td><?= $value->jenis_content ?></td>
-                                                    <td><?= $value->screen_orientation ?></td>
-                                                    <td><?= $value->nama_content ?></td>
-                                                    <td>
-                                                        <a href="" data-toggle="modal" data-target="#modal_play" onclick="return play_video('<?= $value->nama_content ?>','uploads/contents/<?= $value->konten ?>')" title="Putar konten">
-                                                            <span class="fa fa-2x fa-play"></span>
-                                                        </a>
-                                                    </td>
-                                                    <td><?= $value->aktif ?></td>
-                                                    <td><?= $value->timestamp ?></td>
-                                                    <td>
-                                                        <a href="<?= base_url('public/delkonten_ao/' . $value->id_content) ?>" onclick="return confirm('Yakin hapus konten <?= $value->nama_content ?>?')">
-                                                            <span class="fa fa-trash-o"></span>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <?php
-                                            }
-                                            ?>
-
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table" id="datakonten">
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <!-- END DEFAULT DATATABLE -->
@@ -255,7 +231,7 @@
             </div>
         </div>
 
-        <!--Modal play single konten-->
+        <!--Modal play single video-->
         <div class="modal" id="modal_play" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -263,7 +239,7 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 id="content-name" class="modal-title" id="defModalHead">Play Konten</h4>
                     </div>
-                    <div class="modal-body" style="text-align: center">                     
+                    <div class="modal-body" style="text-align: center">
                         <video
                             id="my-video"
                             class="video-js"
@@ -290,7 +266,27 @@
                 </div>
             </div>
         </div>
-        
+
+        <!--Modal view single image-->
+        <div class="modal" id="modal_view_img" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 id="img-name" class="modal-title" id="defModalHead">View Image</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center">
+                        <img id="my-img">
+                        <p></p>
+                        <a id="fullscreen-img" href="#" class="btn btn-danger"><span class="fa fa-arrows-alt"></span> Fullscreen</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--Modal play all konten-->
         <div class="modal" id="modal_playall" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -367,7 +363,7 @@
         <script type="text/javascript" src="<?= base_url() ?>/js/plugins/bootstrap/bootstrap-select.js"></script>
         <script type="text/javascript" src="<?= base_url() ?>/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 
-        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/js/plugins/datatables/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
         <!-- END PAGE PLUGINS -->
 
         <!-- START TEMPLATE -->

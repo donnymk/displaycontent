@@ -23,8 +23,8 @@ class AOAjax extends BaseController {
         // Check for AJAX request
         if ($this->request->isAJAX()) {
             // QUERY MELALUI MODEL
-            $model = new AOModel();
-            $get_data_content = $model->getContentByOutlet($id_outlet)->getResult();
+            $AOmodel = new AOModel();
+            $get_data_content = $AOmodel->getContentByOutlet($id_outlet)->getResult();
 
 //            foreach ($get_data_content as $key => $value):    
 //                // button update dan delete
@@ -36,12 +36,10 @@ class AOAjax extends BaseController {
 //                            $value->jenis_content,
 //                            $value->screen_orientation,
 //                            $value->nama_content,
-//                            $value->data,
+//                            $value->konten,
 //                            $value->aktif,
 //                            $value->timestamp,
-//                            '<a class="btn btn-primary" href="cetak_form/' . $value->id_content . '" target="_blank"><span class="fa fa-2x fa-file-pdf"></span></a>',
-//                            $update_button,
-//                            $delete_button)
+//                            $update_button.$delete_button)
 //                );
 //            endforeach;
 

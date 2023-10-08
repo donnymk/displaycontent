@@ -32,7 +32,7 @@ class AOModel extends Model {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
 
-        $builder->select('id_content, jenis_content, screen_orientation, nama_content, data, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
+        $builder->select('id_content, jenis_content, screen_orientation, nama_content, data AS konten, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
 		$builder->where('id_outlet', $id_outlet);
         //return $builder->getCompiledSelect();
         $query = $builder->get();

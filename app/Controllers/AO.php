@@ -75,10 +75,11 @@ class AO extends BaseController {
         //var_dump($session); exit();
         // QUERY MELALUI MODEL
         $model = new AOModel();
-        $data['content'] = $model->getContentByOutlet($id_outlet)->getResult();
+        //$data['content'] = $model->getContentByOutlet($id_outlet)->getResult();
         $data['session'] = $session;
 		
-        return view('adminoutlet/kelolakonten_ao', $data);
+        //return view('adminoutlet/kelolakonten_ao', $data);
+        return view('adminoutlet/kelolakonten_ao_alt', $data);
     }
 
     // insert konten
