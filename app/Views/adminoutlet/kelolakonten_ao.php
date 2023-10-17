@@ -26,7 +26,7 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="<?= base_url('public/home_ao') ?>">Display Content</a>
+                        <a href="<?= base_url('public/') ?>">Display Content</a>
                         <a href="#" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-profile">
@@ -45,7 +45,7 @@
                     </li>
                     <li class="xn-title">Navigation</li>
                     <li>
-                        <a href="<?= base_url('public/home_ao') ?>"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+                        <a href="<?= base_url('public/') ?>"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
                     </li>
                     <li>
                         <a href="<?= base_url('public/konten_ao') ?>"><span class="fa fa-cloud-upload"></span> <span class="xn-text">Kelola konten</span></a>

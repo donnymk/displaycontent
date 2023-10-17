@@ -35,22 +35,22 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Superadmin::index');
+$routes->get('/', 'AO::index');
+$routes->get('formlogin_ao', 'AOAuth::formlogin_adminoutlet');
+$routes->post('login_ao', 'AOAuth::login_adminoutlet');
+$routes->get('konten_ao', 'AO::konten_ao');
+$routes->post('input_konten', 'AO::insert_konten');
+$routes->get('delkonten_ao/(:num)', 'AO::delkonten/$1');
+$routes->get('logout_ao', 'AO::logout_ao');
+$routes->get('get_content_ao_ajax', 'AOAjax::get_content');
+
+$routes->get('home_sa', 'Superadmin::index');
 $routes->get('formlogin_sa', 'SuperadminAuth::formlogin_superadmin');
 $routes->post('login_sa', 'SuperadminAuth::login_superadmin');
 $routes->post('input_outlet', 'Superadmin::insert_outlet');
 $routes->get('del_outlet/(:num)', 'Superadmin::delete_outlet/$1');
 $routes->get('logout_sa', 'Superadmin::logout_superadmin');
 $routes->get('reset_passw_outlet/(:num)', 'Superadmin::resetpassw_outlet/$1');
-
-$routes->get('formlogin_ao', 'AOAuth::formlogin_adminoutlet');
-$routes->post('login_ao', 'AOAuth::login_adminoutlet');
-$routes->get('home_ao', 'AO::index');
-$routes->get('konten_ao', 'AO::konten_ao');
-$routes->post('input_konten', 'AO::insert_konten');
-$routes->get('delkonten_ao/(:num)', 'AO::delkonten/$1');
-$routes->get('logout_ao', 'AO::logout_ao');
-$routes->get('get_content_ao_ajax', 'AOAjax::get_content');
 
 $routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 

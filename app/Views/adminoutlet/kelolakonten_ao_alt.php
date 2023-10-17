@@ -42,7 +42,7 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="<?= base_url('public/home_ao') ?>">Display Content</a>
+                        <a href="<?= base_url('public/') ?>">Display Content</a>
                         <a href="#" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-profile">
@@ -61,7 +61,7 @@
                     </li>
                     <li class="xn-title">Navigation</li>
                     <li>
-                        <a href="<?= base_url('public/home_ao') ?>"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+                        <a href="<?= base_url('public/') ?>"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
                     </li>
                     <li>
                         <a href="<?= base_url('public/konten_ao') ?>"><span class="fa fa-cloud-upload"></span> <span class="xn-text">Kelola konten</span></a>
@@ -151,7 +151,7 @@
                                         <span class="fa fa-plus"></span> Tambah konten
                                     </button>
                                     <button class="btn btn-danger" data-toggle="modal" data-target="#modal_playall">
-                                        <span class="fa fa-play"></span> Play all active content
+                                        <span class="fa fa-play"></span> Play all active video
                                     </button>
                                     <br><br>
                                     <div class="table-responsive">
@@ -287,13 +287,13 @@
             </div>
         </div>
 
-        <!--Modal play all konten-->
+        <!--Modal play all active video-->
         <div class="modal" id="modal_playall" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="defModalHead">Play All Active Content</h4>
+                        <h4 class="modal-title" id="defModalHead">Play All Active Video</h4>
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <h5>Currently playing: <span id="current-content-name"></span></h5>

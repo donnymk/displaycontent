@@ -87,7 +87,7 @@ class AOAuth extends BaseController {
             session_write_close();
 
             // Go to specific URI
-            return redirect()->to(base_url('public/home_ao'));
+            return redirect()->to(base_url('public/'));
         }
         // jika password salah
         else {

@@ -36,7 +36,7 @@ fetch("get_content_ao_ajax", {
             });
 
             // filter konten yang aktif dan format data sesuai yang dibutuhkan video.js
-            json_data = get_active_contents(data);
+            json_data = get_active_video(data);
             play_all_active_video(json_data);
         })
         .catch((error) => {
@@ -93,10 +93,10 @@ function play_video(content_name, source) {
 // fungsi untuk putar semua video yang aktif
 function play_all_active_video(list_data) {
     var player_all = videojs('all-video');
-    //console.log(list_data);
+    console.log(list_data);
 
     player_all.playlist(JSON.parse(list_data));
-    // Play through the playlist automatically.
+    // Play through the playlist after x second(s).
     player_all.playlist.autoadvance(0);
     // When repeat is enabled, the "next" video after the final video in the playlist is the first video in the playlist. This affects the behavior of calling next(), of autoadvance, and so on.
     player_all.playlist.repeat(true);
@@ -137,14 +137,14 @@ function set_contents_datatable(data) {
 
 // untuk memfilter konten yang aktif
 // dan memformat data sesuai yang dibutuhkan video.js
-function get_active_contents(data) {
+function get_active_video(data) {
     //console.log(data.data);
-    var ajax_data = data.data;
-    var list = [];
+    const ajax_data = data.data;
+    const list = [];
 
-    for (i = 0; i < ajax_data.length; i++) {
-        // jika konten "tidak aktif" maka lewati
-        if (ajax_data[i].aktif !== '1') {
+    for (let i = 0; i < ajax_data.length; i++) {
+        // jika konten "tidak aktif" atau jenis konten bukan video maka lewati
+        if (ajax_data[i].aktif !== '1' || ajax_data[i].jenis_content !== 'video') {
             continue;
         }
         // jika konten "aktif" tambahkan ke list
@@ -154,7 +154,7 @@ function get_active_contents(data) {
                     type: 'video/mp4'
                 }]
         }
-        list[i] = item;
+        list.push(item);
     }
     active_contents = JSON.stringify(list);
     //return list;

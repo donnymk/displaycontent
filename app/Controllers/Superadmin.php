@@ -124,7 +124,7 @@ class Superadmin extends BaseController {
             // set flash data
             $session->setFlashdata('inputOutletStatus', 'Outlet berhasil ditambahkan.');
             // Go to specific URI
-            return redirect()->to(base_url('public'));
+            return redirect()->to(base_url('public/home_sa'));
         }
 
         $errors = 'The file has already been moved.';
@@ -153,7 +153,7 @@ class Superadmin extends BaseController {
             // set flash data
             $session->setFlashdata('delOutletStatus', 'Outlet berhasil dihapus.');
             // Go to specific URI
-            return redirect()->to(base_url('public'));
+            return redirect()->to(base_url('public/home_sa'));
         }
     }
 
@@ -181,7 +181,7 @@ class Superadmin extends BaseController {
         $session->setFlashdata('resetPasswOutletStatus', 'Reset password untuk outlet ' . $nama_outlet . ' berhasil. Password sekarang adalah ' . $default_password . '.');
 
         // go to previous page
-        return redirect()->to(base_url('public'));
+        return redirect()->to(base_url('public/home_sa'));
     }
 
     // keluar dari superadmin
