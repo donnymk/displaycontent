@@ -16,32 +16,32 @@ fetch("get_content_ao_ajax", {
         "X-Requested-With": "XMLHttpRequest"
     }
 })
-        .then(response => response.json())
-        .then(data => {
-            // memformat data sesuai yang dibutuhkan Databables
-            json_datatable = set_contents_datatable(data);
-            //console.log(json_datatable);
-            new DataTable('#datakonten', {
-                columns: [
-                    {title: '#'},
-                    {title: 'Jenis konten'},
-                    {title: 'Screen Oreientation'},
-                    {title: 'Nama konten'},
-                    {title: 'Konten'},
-                    {title: 'Status'},
-                    {title: 'Ditambahkan'},
-                    {title: ''}
-                ],
-                data: JSON.parse(json_datatable)
-            });
+.then(response => response.json())
+.then(data => {
+    // memformat data sesuai yang dibutuhkan Databables
+    json_datatable = set_contents_datatable(data);
+    //console.log(json_datatable);
+    new DataTable('#datakonten', {
+        columns: [
+            {title: '#'},
+            {title: 'Jenis konten'},
+            {title: 'Screen Oreientation'},
+            {title: 'Nama konten'},
+            {title: 'Konten'},
+            {title: 'Status'},
+            {title: 'Ditambahkan'},
+            {title: ''}
+        ],
+        data: JSON.parse(json_datatable)
+    });
 
-            // filter konten yang aktif dan format data sesuai yang dibutuhkan video.js
-            json_data = get_active_video(data);
-            play_all_active_video(json_data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+    // filter konten yang aktif dan format data sesuai yang dibutuhkan video.js
+    json_data = get_active_video(data);
+    play_all_active_video(json_data);
+})
+.catch((error) => {
+    console.error('Error:', error);
+});
        
 // Use the Fullscreen API to request the browser to enter full screen mode for a specific element, such as an image
 // Add an event listener to the image element that calls the requestFullscreen method when clicked
@@ -104,10 +104,10 @@ function play_all_active_video(list_data) {
 
 // memformat data sesuai yang dibutuhkan Databables
 function set_contents_datatable(data) {
-    var arr_datatables = [];
-    var ajax_data = data.data;
+    const arr_datatables = [];
+    const ajax_data = data.data;
 
-    for (i = 0; i < ajax_data.length; i++) {
+    for (let i = 0; i < ajax_data.length; i++) {
         var list = [];
         // keterangan status
         var status = 'Aktif';
