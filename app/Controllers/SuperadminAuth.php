@@ -68,7 +68,7 @@ class SuperadminAuth extends BaseController {
             session_write_close();
 
             // Go to specific URI
-            return redirect()->to(base_url('public/'));
+            return redirect()->to(base_url('public/home_sa'));
         }
         // jika password salah
         else {

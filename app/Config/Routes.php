@@ -43,6 +43,8 @@ $routes->post('input_konten', 'AO::insert_konten');
 $routes->get('delkonten_ao/(:num)', 'AO::delkonten/$1');
 $routes->get('logout_ao', 'AO::logout_ao');
 $routes->get('get_content_ao_ajax', 'AOAjax::get_content');
+$routes->get('activate_content_ao/(:num)', 'AO::activate_content/$1');
+$routes->get('deactivate_content_ao/(:num)', 'AO::deactivate_content/$1');
 
 $routes->get('home_sa', 'Superadmin::index');
 $routes->get('formlogin_sa', 'SuperadminAuth::formlogin_superadmin');

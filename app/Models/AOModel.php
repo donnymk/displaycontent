@@ -16,7 +16,7 @@ class AOModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     //protected $useSoftDeletes = true;
-    protected $allowedFields = ['id_content','jenis_content', 'screen_orientation', 'nama_content', 'data', 'id_outlet', 'aktif', 'timestamp'];
+    protected $allowedFields = ['id_content', 'jenis_content', 'screen_orientation', 'nama_content', 'data', 'id_outlet', 'aktif', 'timestamp'];
 //protected $useTimestamps = true;
 //    protected $createdField  = 'created_at';
 //    protected $updatedField  = 'updated_at';
@@ -25,7 +25,6 @@ class AOModel extends Model {
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
-    
 
     // get content by ID outlet
     public function getContentByOutlet($id_outlet) {
@@ -33,22 +32,22 @@ class AOModel extends Model {
         $builder = $this->builder();
 
         $builder->select('id_content, jenis_content, screen_orientation, nama_content, data AS konten, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
-		$builder->where('id_outlet', $id_outlet);
+        $builder->where('id_outlet', $id_outlet);
         //return $builder->getCompiledSelect();
         $query = $builder->get();
         return $query;
     }
-    
+
     // get content by ID konten
     public function getContentByID($id_konten) {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
-		$builder->where('id_content', $id_konten);
+        $builder->where('id_content', $id_konten);
         //return $builder->getCompiledSelect();
         $query = $builder->get();
         return $query;
     }
-    
+
     // count content by ID outlet
     public function countContentById($id_outlet) {
         // tampilkan menggunakan query builder
@@ -68,13 +67,35 @@ class AOModel extends Model {
         return $builder->insert($data);
         //return $builder->getCompiledInsert();
     }
-    
+
     // delete konten by ID
     public function delKonten($id_konten) {
         // tentukan tabel
         $builder = $this->builder();
         $builder->where('id_content', $id_konten);
         return $builder->delete();
+    }
+
+    // aktifkan konten
+    public function setContentActive($id_konten) {
+        // update menggunakan query builder
+        $builder = $this->builder();
+        $builder->set('aktif', 1);
+        $builder->where('id_content', $id_konten);
+        //return $builder->getCompiledSelect();
+        $query = $builder->update();
+        return $query;
+    }
+    
+    // nonaktifkan konten
+    public function setContentInactive($id_konten) {
+        // update menggunakan query builder
+        $builder = $this->builder();
+        $builder->set('aktif', 0);
+        $builder->where('id_content', $id_konten);
+        //return $builder->getCompiledSelect();
+        $query = $builder->update();
+        return $query;
     }
 
     // kosongkan data upload

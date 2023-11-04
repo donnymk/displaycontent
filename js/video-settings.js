@@ -109,12 +109,13 @@ function set_contents_datatable(data) {
 
     for (let i = 0; i < ajax_data.length; i++) {
         var list = [];
-        // keterangan status
-        var status = 'Aktif';
+        // status default adalah "aktif"
+        var status = '<a href="deactivate_content_ao/' + ajax_data[i].id_content + '" title="Nonaktifkan"><span class="fa fa-toggle-on"></span></a>';
         // tombol view video
         var tombol_view = '<a href="" data-toggle="modal" data-target="#modal_play" onclick="return play_video(\'' + ajax_data[i].nama_content + '\',\'uploads/contents/' + ajax_data[i].konten + '\')" title="Putar video"><span class="fa fa-2x fa-play"></span></a>';
+        // jika status konten tidak aktif
         if (ajax_data[i].aktif === "0") {
-            status = 'Tidak aktif';
+            status = '<a href="activate_content_ao/' + ajax_data[i].id_content + '" title="Aktifkan"><span class="fa fa-toggle-off"></span></a>';
         }
         // tombol view image
         if (ajax_data[i].jenis_content === "gambar") {

@@ -23,7 +23,7 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="index.html">Display Content</a>
+                        <a href="#">Display Content</a>
                         <a href="#" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-profile">
@@ -41,17 +41,17 @@
                                                         </div>-->
                         </div>
                     </li>
-                    <li class="xn-title">Outlet</li>
                     <li>
-                        <a href="index.html"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+                        <a href="#"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
                     </li>
+                    <li class="xn-title">Outlet</li>
                     <li class="active">
-                        <a href="pages-address-book.html"><span class="fa fa-map-marker"></span> Daftar Outlet</a>
-                    </li>
+                        <a href="<?= base_url('public/home_sa') ?>"><span class="fa fa-map-marker"></span> Daftar Outlet</a>
+<!--                    </li>
                     <li class="xn-title">Client & content</li>
                     <li>
                         <a href="maps.html"><span class="fa fa-users"></span> <span class="xn-text">Daftar client & content</span></a>
-                    </li>
+                    </li>-->
 
                 </ul>
                 <!-- END X-NAVIGATION -->

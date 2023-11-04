@@ -136,20 +136,7 @@ foreach ($count_content as $key => $value) {
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?= $countAll ?></div>
                                     <div class="widget-title">Jumlah konten</div>
-                                    <div class="widget-subtitle">Aktif dan tidak aktif</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
-                                <div class="widget-item-left">
-                                    <span class="fa fa-play-circle-o"></span>
-                                </div>
-                                <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countActive ?></div>
-                                    <div class="widget-title">Jumlah konten</div>
-                                    <div class="widget-subtitle">Aktif</div>
+                                    <div class="widget-subtitle">Semua</div>
                                 </div>
 
                             </div>
@@ -176,6 +163,19 @@ foreach ($count_content as $key => $value) {
                                     <div class="widget-int num-count"><?= $countVideo ?></div>
                                     <div class="widget-title">Konten video</div>
                                     <div class="widget-subtitle"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-play-circle-o"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count"><?= $countActive ?></div>
+                                    <div class="widget-title">Jumlah konten</div>
+                                    <div class="widget-subtitle">Aktif</div>
                                 </div>
 
                             </div>

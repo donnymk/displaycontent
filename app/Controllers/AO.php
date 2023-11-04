@@ -158,30 +158,30 @@ class AO extends BaseController {
     }
 
     // delete data outlet by ID
-    public function delete_outlet($id_outlet) {
-        // initialize the session
-        $session = \Config\Services::session();
-
-        // QUERY MELALUI MODEL
-        $model = new SuperadmModel();
-        //get data admin outlet
-        $data_outlet = $model->getAdminOutletById($id_outlet)->getResult();
-        $foto_outlet = $data_outlet[0]->foto_outlet;
-        
-        // cek file foto, jika ada hapus
-        if (file_exists('uploads/' . $foto_outlet) && is_file('uploads/' . $foto_outlet)) {
-            unlink('uploads/' . $foto_outlet);
-        }
-        // hapus outlet dari database
-        $del = $model->delOutlet($id_outlet);
-
-        if ($del) {
-            // set flash data
-            $session->setFlashdata('delOutletStatus', 'Outlet berhasil dihapus.');
-            // Go to specific URI
-            return redirect()->to(base_url('public'));
-        }
-    }
+//    public function delete_outlet($id_outlet) {
+//        // initialize the session
+//        $session = \Config\Services::session();
+//
+//        // QUERY MELALUI MODEL
+//        $model = new SuperadmModel();
+//        //get data admin outlet
+//        $data_outlet = $model->getAdminOutletById($id_outlet)->getResult();
+//        $foto_outlet = $data_outlet[0]->foto_outlet;
+//        
+//        // cek file foto, jika ada hapus
+//        if (file_exists('uploads/' . $foto_outlet) && is_file('uploads/' . $foto_outlet)) {
+//            unlink('uploads/' . $foto_outlet);
+//        }
+//        // hapus outlet dari database
+//        $del = $model->delOutlet($id_outlet);
+//
+//        if ($del) {
+//            // set flash data
+//            $session->setFlashdata('delOutletStatus', 'Outlet berhasil dihapus.');
+//            // Go to specific URI
+//            return redirect()->to(base_url('public'));
+//        }
+//    }
     
     // delete data konten by ID
     public function delkonten($id_konten) {
@@ -204,6 +204,42 @@ class AO extends BaseController {
         if ($del) {
             // set flash data
             $session->setFlashdata('delKontenStatus', 'Konten berhasil dihapus.');
+            // Go to specific URI
+            return redirect()->to(base_url('public/konten_ao'));
+        }
+    }
+    
+    // aktifkan konten by ID
+    public function activate_content($id_konten) {
+        // initialize the session
+        //$session = \Config\Services::session();
+
+        // QUERY MELALUI MODEL
+        $model = new AOModel();
+        //get data admin outlet
+        $set_konten = $model->setContentActive($id_konten);
+
+        if ($set_konten) {
+            // set flash data
+            //$session->setFlashdata('delKontenStatus', 'Konten berhasil dihapus.');
+            // Go to specific URI
+            return redirect()->to(base_url('public/konten_ao'));
+        }
+    }
+    
+    // nonaktifkan konten by ID
+    public function deactivate_content($id_konten) {
+        // initialize the session
+        //$session = \Config\Services::session();
+
+        // QUERY MELALUI MODEL
+        $model = new AOModel();
+        //get data admin outlet
+        $set_konten = $model->setContentInactive($id_konten);
+
+        if ($set_konten) {
+            // set flash data
+            //$session->setFlashdata('delKontenStatus', 'Konten berhasil dihapus.');
             // Go to specific URI
             return redirect()->to(base_url('public/konten_ao'));
         }
