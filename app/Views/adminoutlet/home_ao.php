@@ -36,11 +36,37 @@ foreach ($count_content as $key => $value) {
                     </li>
                     <li class="xn-profile">
                         <a href="#" class="profile-mini">
-                            <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                            <?php
+                            // jika ada foto
+                            if ($session->foto_outlet != '') {
+                                ?>
+                                <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                                <?php
+                            }
+                            // jika tidak pakai foto
+                            else {
+                                ?>
+                                <img src="<?= base_url() ?>/assets/images/users/no-image.jpg" alt="Tidak ada foto"/>
+                                <?php
+                            }
+                            ?>
                         </a>
                         <div class="profile">
                             <div class="profile-image">
+                            <?php
+                            // jika ada foto
+                            if ($session->foto_outlet != '') {
+                                ?>
                                 <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                                <?php
+                            }
+                            // jika tidak pakai foto
+                            else {
+                                ?>
+                                <img src="<?= base_url() ?>/assets/images/users/no-image.jpg" alt="Tidak ada foto"/>
+                                <?php
+                            }
+                            ?>
                             </div>
                             <div class="profile-data">
                                 <div class="profile-data-name"><?= $session->nama_outlet ?></div>
@@ -126,7 +152,7 @@ foreach ($count_content as $key => $value) {
                             </div>
                         </div>
                         <!-- END PROFIL ADMIN OUTLET -->
-                        
+
                         <!-- START WIDGET -->
                         <div class="col-md-3">
                             <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
@@ -196,7 +222,7 @@ foreach ($count_content as $key => $value) {
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
                     <div class="mb-content">
-                         <p>Keluar dari Admin Outlet?</p>
+                        <p>Keluar dari Admin Outlet?</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">

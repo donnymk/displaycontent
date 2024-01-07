@@ -5,13 +5,11 @@
         <group>
             <file>file:/D:/Git%20Repository/displaycontent/app/Config/Routes.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/AO.php</file>
-            <file>file:/D:/Git%20Repository/displaycontent/app/Views/adminoutlet/kelolakonten_ao.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/Superadmin.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Views/adminoutlet/kelolakonten_ao_alt.php</file>
-            <file>file:/D:/Git%20Repository/displaycontent/app/Models/AOModel.php</file>
-            <file>file:/D:/Git%20Repository/displaycontent/js/plugins.js</file>
-            <file>file:/D:/Git%20Repository/displaycontent/app/Controllers/AOAjax.php</file>
-            <file>file:/D:/Git%20Repository/displaycontent/js/video-settings.js</file>
+            <file>file:/D:/Git%20Repository/displaycontent/app/Views/superadmin/list_outlet.php</file>
             <file>file:/D:/Git%20Repository/displaycontent/app/Views/adminoutlet/home_ao.php</file>
+            <file>file:/D:/Git%20Repository/displaycontent/js/video-settings.js</file>
         </group>
     </open-files>
 </project-private>

@@ -8,7 +8,7 @@ var btnFullScreenImage = document.getElementById("fullscreen-img");
 // get data content from ajax request
 // then:
 // 1. create Datatable (https://datatables.net/examples/data_sources/js_array.html)
-// 2. filter konten yang aktif dan format data sesuai yang dibutuhkan video.js
+// 2. filter konten video yang aktif dan format data sesuai yang dibutuhkan video.js
 fetch("get_content_ao_ajax", {
     method: "GET",
     headers: {
@@ -25,7 +25,7 @@ fetch("get_content_ao_ajax", {
         columns: [
             {title: '#'},
             {title: 'Jenis konten'},
-            {title: 'Screen Oreientation'},
+            {title: 'Screen Orientation'},
             {title: 'Nama konten'},
             {title: 'Konten'},
             {title: 'Status'},

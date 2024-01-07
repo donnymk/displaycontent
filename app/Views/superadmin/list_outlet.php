@@ -152,6 +152,7 @@
                                                 </div>
                                                 <select name="kotaOutlet" class="form-control" required="">
                                                     <option value="">--- Pilih Kota ---</option>
+                                                    <option value="Kabupaten/Kota di Luar Jawa Tengah">Kabupaten/Kota di Luar Jawa Tengah</option>
                                                     <option value="Kabupaten Banjarnegara">Kabupaten Banjarnegara</option>
                                                     <option value="Kabupaten Banyumas">Kabupaten Banyumas</option>
                                                     <option value="Kabupaten Batang">Kabupaten Batang</option>

@@ -47,11 +47,37 @@
                     </li>
                     <li class="xn-profile">
                         <a href="#" class="profile-mini">
-                            <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                            <?php
+                            // jika ada foto
+                            if ($session->foto_outlet != '') {
+                                ?>
+                                <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                                <?php
+                            }
+                            // jika tidak pakai foto
+                            else {
+                                ?>
+                                <img src="<?= base_url() ?>/assets/images/users/no-image.jpg" alt="Tidak ada foto"/>
+                                <?php
+                            }
+                            ?>
                         </a>
                         <div class="profile">
                             <div class="profile-image">
-                                <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                                <?php
+                                // jika ada foto
+                                if ($session->foto_outlet != '') {
+                                    ?>
+                                    <img src="<?= base_url() ?>/public/uploads/<?= $session->foto_outlet ?>" alt="Foto Outlet"/>
+                                    <?php
+                                }
+                                // jika tidak pakai foto
+                                else {
+                                    ?>
+                                    <img src="<?= base_url() ?>/assets/images/users/no-image.jpg" alt="Tidak ada foto"/>
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <div class="profile-data">
                                 <div class="profile-data-name"><?= $session->nama_outlet ?></div>
@@ -190,6 +216,7 @@
                                     <option value="">--- Pilih ---</option>
                                     <option value="gambar">Gambar</option>
                                     <option value="video">Video</option>
+                                    <option value="teks">Teks berjalan</option>
                                 </select>
                             </div>
                         </div>
@@ -218,7 +245,12 @@
                             <label class="col-md-3 col-xs-12 control-label">File konten</label>
                             <div class="col-md-6 col-xs-12">
                                 <input type="file" class="fileinput btn-primary" name="konten" id="konten" title="Browse file" required=""/>
-                                <!--<span class="help-block">Input type file</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Isi konten</label>
+                            <div class="col-md-6 col-xs-12">
+                                <textarea class="form-control" name="konten_alt" id="konten_alt" required=""></textarea>
                             </div>
                         </div>
                     </div>

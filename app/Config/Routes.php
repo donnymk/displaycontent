@@ -35,6 +35,8 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+// admin outlet
 $routes->get('/', 'AO::index');
 $routes->get('formlogin_ao', 'AOAuth::formlogin_adminoutlet');
 $routes->post('login_ao', 'AOAuth::login_adminoutlet');
@@ -46,6 +48,7 @@ $routes->get('get_content_ao_ajax', 'AOAjax::get_content');
 $routes->get('activate_content_ao/(:num)', 'AO::activate_content/$1');
 $routes->get('deactivate_content_ao/(:num)', 'AO::deactivate_content/$1');
 
+// superadmin
 $routes->get('home_sa', 'Superadmin::index');
 $routes->get('formlogin_sa', 'SuperadminAuth::formlogin_superadmin');
 $routes->post('login_sa', 'SuperadminAuth::login_superadmin');
@@ -54,6 +57,7 @@ $routes->get('del_outlet/(:num)', 'Superadmin::delete_outlet/$1');
 $routes->get('logout_sa', 'Superadmin::logout_superadmin');
 $routes->get('reset_passw_outlet/(:num)', 'Superadmin::resetpassw_outlet/$1');
 
+// client
 $routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 
 /*
