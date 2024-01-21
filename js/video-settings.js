@@ -1,9 +1,20 @@
 var json_data;
 var json_datatable;
+
 // Get the image element by its id
 var gambar = document.getElementById("my-img");
 // button to trigger fullscreen image view
 var btnFullScreenImage = document.getElementById("fullscreen-img");
+
+var divgambar = document.getElementById("ck_slide");
+
+// digunakan sebagai kontrol (play and stop) slideshow
+var intervalId;
+var intervalTime = 10000; // initial interval time
+var stateSlideshow = 0; //  0 = idle, 1 = running, 2 = stopped
+
+// kondisi awal aktifkan input untuk konten multimedia (gambar dan video)
+aktifkan_konten_mm();
 
 // get data content from ajax request
 // then:
@@ -16,33 +27,84 @@ fetch("get_content_ao_ajax", {
         "X-Requested-With": "XMLHttpRequest"
     }
 })
-.then(response => response.json())
-.then(data => {
-    // memformat data sesuai yang dibutuhkan Databables
-    json_datatable = set_contents_datatable(data);
-    //console.log(json_datatable);
-    new DataTable('#datakonten', {
-        columns: [
-            {title: '#'},
-            {title: 'Jenis konten'},
-            {title: 'Screen Orientation'},
-            {title: 'Nama konten'},
-            {title: 'Konten'},
-            {title: 'Status'},
-            {title: 'Ditambahkan'},
-            {title: ''}
-        ],
-        data: JSON.parse(json_datatable)
-    });
+        .then(response => response.json())
+        .then(data => {
+            // memformat data sesuai yang dibutuhkan Databables
+            json_datatable = set_contents_datatable(data);
+            //console.log(json_datatable);
+            new DataTable('#datakonten', {
+                columns: [
+                    {title: '#'},
+                    {title: 'Jenis konten'},
+                    {title: 'Screen Orientation'},
+                    {title: 'Nama konten'},
+                    {title: 'Konten'},
+                    {title: 'Status'},
+                    {title: 'Ditambahkan'},
+                    {title: ''}
+                ],
+                data: JSON.parse(json_datatable)
+            });
 
-    // filter konten yang aktif dan format data sesuai yang dibutuhkan video.js
-    json_data = get_active_video(data);
-    play_all_active_video(json_data);
-})
-.catch((error) => {
-    console.error('Error:', error);
-});
-       
+            // filter konten video yang aktif dan format data sesuai yang dibutuhkan video.js
+            json_data = get_active_video(data);
+            play_all_active_video(json_data);
+
+            // filter konten gambar yang aktif, format data untuk slideshow dan
+            // hanya tampilkan gambar pertama (gambar selanjutnya disembunyikan)
+            div_images = get_active_images(data);
+            $('#ck_slide').html(div_images);
+            $("#ck_slide > div:gt(0)").hide();
+            
+            console.log(stateSlideshow);
+            
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+// Add a click event listener to the image and button element that calls the makeFullScreen function
+gambar.addEventListener("click", makeFullScreen);
+btnFullScreenImage.addEventListener("click", makeFullScreen);
+
+divgambar.addEventListener("click", makeFullScreenDiv);
+
+// aktifkan input konten multimedia dan nonaktifkan input konten teks
+function aktifkan_konten_mm() {
+    $('#div_konten_mm').show();
+    $('#div_konten_alt').hide();
+    $('#konten').attr('required', 'required');
+    $('#kontenAlt').removeAttr('required');
+}
+
+// aktifkan input konten teks dan nonaktifkan input konten multimedia
+function aktifkan_konten_alt() {
+    $('#div_konten_mm').hide();
+    $('#div_konten_alt').show();
+    $('#kontenAlt').attr('required', 'required');
+    $('#konten').removeAttr('required');
+}
+
+function atur_konten() {
+    // get data input jenis konten
+    var jenisKonten = $('#jenisKonten').val();
+
+    switch (jenisKonten) {
+        case 'gambar':
+            aktifkan_konten_mm();
+            break;
+        case 'video':
+            aktifkan_konten_mm();
+            break;
+        case 'teks':
+            aktifkan_konten_alt();
+            break;
+        default:
+            console.log('Terjadi sesuatu yang tidak diharapkan');
+            break;
+    }
+}
+
 // Use the Fullscreen API to request the browser to enter full screen mode for a specific element, such as an image
 // Add an event listener to the image element that calls the requestFullscreen method when clicked
 // Handle the different browser prefixes for this method, such as webkitRequestFullscreen or mozRequestFullScreen
@@ -68,9 +130,24 @@ function makeFullScreen() {
     }
 }
 
-// Add a click event listener to the image and button element that calls the makeFullScreen function
-gambar.addEventListener("click", makeFullScreen);
-btnFullScreenImage.addEventListener("click", makeFullScreen);
+// Define a function to request full screen mode for the slideshow images
+function makeFullScreenDiv() {
+    // Check if the image element is already in full screen mode
+    if (document.fullscreenElement === divgambar) {
+        // Exit full screen mode
+        document.exitFullscreen();
+    } else {
+        // Request full screen mode for the image element
+        // Use different browser prefixes if needed
+        if (divgambar.requestFullscreen) {
+            divgambar.requestFullscreen();
+        } else if (divgambar.webkitRequestFullscreen) {
+            divgambar.webkitRequestFullscreen();
+        } else if (divgambar.mozRequestFullScreen) {
+            divgambar.mozRequestFullScreen();
+        }
+    }
+}
 
 // fungsi untuk menampilkan gambar yang dipilih user
 function view_img(content_name, source) {
@@ -121,6 +198,10 @@ function set_contents_datatable(data) {
         if (ajax_data[i].jenis_content === "gambar") {
             tombol_view = '<a href="" data-toggle="modal" data-target="#modal_view_img" onclick="return view_img(\'' + ajax_data[i].nama_content + '\',\'uploads/contents/' + ajax_data[i].konten + '\')" title="Tampilkan gambar"><span class="fa fa-2x fa-image"></span></a>';
         }
+        // tombol view running text
+        if (ajax_data[i].jenis_content === "teks") {
+            tombol_view = '<a href="view_running_text/' + ajax_data[i].id_content + '" title="Tampilkan teks berjalan"><span class="fa fa-2x fa-file-text"></span></a>';
+        }
         list.push(ajax_data[i].id_content);
         list.push(ajax_data[i].jenis_content);
         list.push(ajax_data[i].screen_orientation);
@@ -128,7 +209,7 @@ function set_contents_datatable(data) {
         list.push(tombol_view);
         list.push(status);
         list.push(ajax_data[i].timestamp);
-        list.push('<a href="delkonten_ao/'+ajax_data[i].id_content+'" onclick="return confirm(\'Yakin hapus konten '+ajax_data[i].nama_content+'?\')"><span class="fa fa-trash-o"></span></a>');
+        list.push('<a href="delkonten_ao/' + ajax_data[i].id_content + '" onclick="return confirm(\'Yakin hapus konten ' + ajax_data[i].nama_content + '?\')"><span class="fa fa-trash-o"></span></a>');
         arr_datatables.push(list);
     }
     data_konten = JSON.stringify(arr_datatables);
@@ -136,7 +217,7 @@ function set_contents_datatable(data) {
     return data_konten;
 }
 
-// untuk memfilter konten yang aktif
+// untuk memfilter konten video yang aktif
 // dan memformat data sesuai yang dibutuhkan video.js
 function get_active_video(data) {
     //console.log(data.data);
@@ -160,4 +241,58 @@ function get_active_video(data) {
     active_contents = JSON.stringify(list);
     //return list;
     return active_contents;
+}
+
+// untuk memfilter konten image yang aktif
+// dan memformat data yang sesuai untuk slideshow images
+function get_active_images(data) {
+    //console.log(data.data);
+    const ajax_data = data.data;
+    var div_slideshow = '';
+
+    for (let i = 0; i < ajax_data.length; i++) {
+        // jika konten "tidak aktif" atau jenis konten bukan gambar maka lewati
+        if (ajax_data[i].aktif !== '1' || ajax_data[i].jenis_content !== 'gambar') {
+            continue;
+        }
+        // jika konten "aktif" tambahkan ke list
+        div_slideshow += '<div><img src="uploads/contents/' + ajax_data[i].konten + '" width="100%"></div>';
+    }
+    //active_contents = JSON.stringify(list);
+    return div_slideshow;
+    //return active_contents;
+}
+
+// to start the interval for slideshow
+function slideshow_images(time) {
+    intervalId = setInterval(function () {
+        $('#ck_slide > div:first')
+                .fadeOut(100)
+                .next()
+                .fadeIn(900)
+                .end()
+                .appendTo('#ck_slide');
+    }, time);
+    stateSlideshow = 1;
+}
+
+// to play or stop slideshow images
+function play_slideshow() {
+    // if slideshow is still running
+    if (stateSlideshow === 1) {
+        // stop the interval
+        clearInterval(intervalId);
+        // set status to 2 (stopped)
+        stateSlideshow = 2;
+        // ubah keterangan tombol
+        $('#btn-slideshow-images').html('<span class="fa fa-play"></span> Start slideshow');
+    }
+    // if slideshow is not started yet (idle) or stopped
+    else if (stateSlideshow === 0 || stateSlideshow === 2) {
+        // start the interval
+        slideshow_images(intervalTime);
+        // ubah keterangan tombol
+        $('#btn-slideshow-images').html('<span class="fa fa-stop"></span> Stop slideshow');
+    }
+    console.log(stateSlideshow);
 }

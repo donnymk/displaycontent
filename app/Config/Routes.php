@@ -47,6 +47,7 @@ $routes->get('logout_ao', 'AO::logout_ao');
 $routes->get('get_content_ao_ajax', 'AOAjax::get_content');
 $routes->get('activate_content_ao/(:num)', 'AO::activate_content/$1');
 $routes->get('deactivate_content_ao/(:num)', 'AO::deactivate_content/$1');
+$routes->get('view_running_text/(:num)', 'AO::view_running_text/$1');
 
 // superadmin
 $routes->get('home_sa', 'Superadmin::index');

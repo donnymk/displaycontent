@@ -52,7 +52,7 @@ class AOModel extends Model {
     public function countContentById($id_outlet) {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
-        $builder->select('COUNT(*) countAll, (SELECT COUNT(*) FROM content WHERE aktif = 1) countActive, (SELECT COUNT(*) FROM content WHERE jenis_content = \'gambar\') countImage, (SELECT COUNT(*) FROM content WHERE jenis_content = \'video\') countVideo');
+        $builder->select('COUNT(*) countAll, (SELECT COUNT(*) FROM content WHERE aktif = 1) countActive, (SELECT COUNT(*) FROM content WHERE jenis_content = \'gambar\') countImage, (SELECT COUNT(*) FROM content WHERE jenis_content = \'video\') countVideo, (SELECT COUNT(*) FROM content WHERE jenis_content = \'teks\') countTeks');
         $builder->where('id_outlet', $id_outlet);
         //return $builder->getCompiledSelect();
         $query = $builder->get();

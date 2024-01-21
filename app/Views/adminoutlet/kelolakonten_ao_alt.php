@@ -31,6 +31,37 @@
                 object-fit: contain;
                 object-position: center;
             }
+            @keyframes marquee {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-90%);
+                }
+            }
+            .marquee {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                background-color: #000000;
+                color: #ffffff
+            }
+            .marquee div {
+                display: inline-block;
+                animation: marquee 10s linear infinite;
+                font-size: 18pt
+            }
+            /*            #my-running-text {
+                            border: 1px solid red;
+                            border-radius: 0.5em;
+                            padding: 10px;
+                        }*/
+            #my-running-text:fullscreen {
+                width: 100vw;
+                height: 100vh;
+                object-fit: contain;
+                object-position: center;
+            }
         </style>
     </head>
     <body>
@@ -126,9 +157,9 @@
 
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">UI Kits</a></li>
-                    <li class="active">Elements</li>
+                    <li><a href="<?= base_url('public/') ?>">Home</a></li>
+                    <!--<li><a href="#">UI Kits</a></li>-->
+                    <li class="active">Kelola konten</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -177,7 +208,10 @@
                                         <span class="fa fa-plus"></span> Tambah konten
                                     </button>
                                     <button class="btn btn-danger" data-toggle="modal" data-target="#modal_playall">
-                                        <span class="fa fa-play"></span> Play all active video
+                                        <span class="fa fa-play"></span> Play active videos
+                                    </button>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal_slideshow_images">
+                                        <span class="fa fa-image"></span> Slideshow active images
                                     </button>
                                     <br><br>
                                     <div class="table-responsive">
@@ -200,19 +234,19 @@
 
         <!-- MODALS -->
         <!--Modal tambah konten-->
-        <div class="modal" id="modal_basic" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+        <div class="modal" id="modal_basic" tabindex="-1" role="dialog" aria-labelledby="defModalHead1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <?= form_open_multipart(base_url('public/input_konten'), 'class="form-horizontal"') ?>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="defModalHead">Tambah Konten</h4>
+                        <h4 class="modal-title" id="defModalHead1">Tambah Konten</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 control-label">Jenis konten</label>
                             <div class="col-md-6 col-xs-12">
-                                <select name="jenisKonten" class="form-control select" required="">
+                                <select name="jenisKonten" id="jenisKonten" class="form-control select" onchange="return atur_konten()" required="">
                                     <option value="">--- Pilih ---</option>
                                     <option value="gambar">Gambar</option>
                                     <option value="video">Video</option>
@@ -241,16 +275,16 @@
                                 <!--<span class="help-block">Nama konten</span>-->
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="div_konten_mm">
                             <label class="col-md-3 col-xs-12 control-label">File konten</label>
                             <div class="col-md-6 col-xs-12">
                                 <input type="file" class="fileinput btn-primary" name="konten" id="konten" title="Browse file" required=""/>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="div_konten_alt">
                             <label class="col-md-3 col-xs-12 control-label">Isi konten</label>
                             <div class="col-md-6 col-xs-12">
-                                <textarea class="form-control" name="konten_alt" id="konten_alt" required=""></textarea>
+                                <textarea class="form-control" name="kontenAlt" id="kontenAlt"></textarea>
                             </div>
                         </div>
                     </div>
@@ -264,12 +298,12 @@
         </div>
 
         <!--Modal play single video-->
-        <div class="modal" id="modal_play" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+        <div class="modal" id="modal_play" tabindex="-1" role="dialog" aria-labelledby="defModalHead2" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 id="content-name" class="modal-title" id="defModalHead">Play Konten</h4>
+                        <h4 id="content-name" class="modal-title" id="defModalHead2">Play Konten</h4>
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <video
@@ -300,12 +334,12 @@
         </div>
 
         <!--Modal view single image-->
-        <div class="modal" id="modal_view_img" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+        <div class="modal" id="modal_view_img" tabindex="-1" role="dialog" aria-labelledby="defModalHead3" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 id="img-name" class="modal-title" id="defModalHead">View Image</h4>
+                        <h4 id="img-name" class="modal-title" id="defModalHead3">View Image</h4>
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <img id="my-img">
@@ -319,13 +353,35 @@
             </div>
         </div>
 
+        <!-- Modal view running text -->
+        <!--        <div class="modal" id="modal_view_text" tabindex="-1" role="dialog" aria-labelledby="defModalHead4" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 id="text-name" class="modal-title" id="defModalHead4">View Running Text</h4>
+                            </div>
+                            <div class="modal-body" style="text-align: center">
+                                <div class="marquee">
+                                    <div id="my-running-text"></div>
+                                </div>
+                                <p></p>
+                                <a id="fullscreen-txt" href="#" class="btn btn-danger"><span class="fa fa-arrows-alt"></span> Fullscreen</a>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
         <!--Modal play all active video-->
-        <div class="modal" id="modal_playall" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+        <div class="modal" id="modal_playall" tabindex="-1" role="dialog" aria-labelledby="defModalHead5" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="defModalHead">Play All Active Video</h4>
+                        <h4 class="modal-title" id="defModalHead5">Play All Active Video</h4>
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <h5>Currently playing: <span id="current-content-name"></span></h5>
@@ -346,6 +402,39 @@
                                 >
                             </p>
                         </video>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal slideshow active images -->
+        <div class="modal" id="modal_slideshow_images" tabindex="-1" role="dialog" aria-labelledby="defModalHead6" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="defModalHead6">Slideshow Active Images (10 seconds)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <span class="fa fa-info"></span> Klik gambar untuk masuk ke layar penuh. Klik gambar lagi untuk keluar dari layar penuh.
+                        </p>
+                        <div style="text-align: center; padding-bottom: 8px">
+                            <button class="btn btn-primary" id="btn-slideshow-images" onclick="return play_slideshow()">
+                                <span class="fa fa-play"></span> Start slideshow
+                            </button>                            
+                        </div>
+                        <div id="ck_slide">
+                            <!--                            <div>
+                                                            <img src="uploads/contents/gambar1.jpg">
+                                                        </div>
+                                                        <div>
+                                                            <img src="uploads/contents/gambar2.jpg">
+                                                        </div>-->
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

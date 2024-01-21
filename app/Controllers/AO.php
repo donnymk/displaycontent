@@ -22,7 +22,7 @@ class AO extends BaseController {
         // cek login
         $this->cek_login();
     }
-    
+
     public function cek_login() {
         // initialize the session
         $session = \Config\Services::session();
@@ -40,7 +40,6 @@ class AO extends BaseController {
 
         // load the form helper
         //helper('form');
-
         // default value
         //$data['username'] = null;
         // cek session login
@@ -56,7 +55,7 @@ class AO extends BaseController {
 
         return view('adminoutlet/home_ao', $data);
     }
-    
+
     // halaman kelola konten oleh admin outlet
     public function konten_ao() {
         // initialize the session
@@ -77,7 +76,7 @@ class AO extends BaseController {
         $model = new AOModel();
         //$data['content'] = $model->getContentByOutlet($id_outlet)->getResult();
         $data['session'] = $session;
-		
+
         //return view('adminoutlet/kelolakonten_ao', $data);
         return view('adminoutlet/kelolakonten_ao_alt', $data);
     }
@@ -92,8 +91,8 @@ class AO extends BaseController {
         $screenOrientation = $this->request->getPost('screenOrientation');
         $namaKonten = $this->request->getPost('namaKonten');
         $konten = $this->request->getFile('konten');
+        $kontenAlt = $this->request->getPost('kontenAlt');
         //var_dump($jenisKonten);        exit();
-
         // aturan file upload (salah satunya wajib diupload)
 //        if($jenisKonten == 'gambar'){
 //            $validationRule = [
@@ -120,28 +119,33 @@ class AO extends BaseController {
 //                ]
 //            ];    
 //        }
-
         // jika yang diupload tidak sesuai rule
 //        if (!$this->validate($validationRule)) {
 //            $errors = $this->validator->getErrors();
 //            return var_dump($errors);
 //        }
-        // jika konten berhasil diupload dan masih ada di temporary folder
-        if (!$konten->hasMoved()) {
-            $content_name = $konten->getRandomName();
-            $konten->move('uploads/contents/', $content_name);
+        // jika konten berbentuk teks
+        if ($jenisKonten == 'teks') {
+            $dataKonten = $kontenAlt;
+        }
+        // jika konten selain teks
+        else {
+            // jika konten berhasil diupload dan masih ada di temporary folder
+            if (!$konten->hasMoved()) {
+                $dataKonten = $konten->getRandomName();
+                $konten->move('uploads/contents/', $dataKonten);
+            }
         }
 
         $data_konten = [
             'jenis_content' => $jenisKonten,
             'screen_orientation' => $screenOrientation,
             'nama_content' => $namaKonten,
-            'data' => $content_name,
+            'data' => $dataKonten,
             'id_outlet' => $session->id_outlet,
             'aktif' => 1
         ];
         //var_dump($data_konten);        exit();
-
         // QUERY MELALUI MODEL
         $model = new AOModel();
         $insert = $model->insertContent($data_konten);
@@ -182,7 +186,6 @@ class AO extends BaseController {
 //            return redirect()->to(base_url('public'));
 //        }
 //    }
-    
     // delete data konten by ID
     public function delkonten($id_konten) {
         // initialize the session
@@ -193,7 +196,7 @@ class AO extends BaseController {
         //get data admin outlet
         $data_konten = $model->getContentByID($id_konten)->getResult();
         $konten = $data_konten[0]->data;
-        
+
         // cek file, jika ada hapus
         if (file_exists('uploads/contents/' . $konten) && is_file('uploads/contents/' . $konten)) {
             unlink('uploads/contents/' . $konten);
@@ -208,12 +211,11 @@ class AO extends BaseController {
             return redirect()->to(base_url('public/konten_ao'));
         }
     }
-    
+
     // aktifkan konten by ID
     public function activate_content($id_konten) {
         // initialize the session
         //$session = \Config\Services::session();
-
         // QUERY MELALUI MODEL
         $model = new AOModel();
         //get data admin outlet
@@ -226,12 +228,11 @@ class AO extends BaseController {
             return redirect()->to(base_url('public/konten_ao'));
         }
     }
-    
+
     // nonaktifkan konten by ID
     public function deactivate_content($id_konten) {
         // initialize the session
         //$session = \Config\Services::session();
-
         // QUERY MELALUI MODEL
         $model = new AOModel();
         //get data admin outlet
@@ -243,6 +244,26 @@ class AO extends BaseController {
             // Go to specific URI
             return redirect()->to(base_url('public/konten_ao'));
         }
+    }
+    
+    public function view_running_text($id_konten) {
+        // initialize the session
+        $session = \Config\Services::session();
+
+        // default value
+        //$data['username'] = null;
+        // cek session login
+        if ($session->has('username')) {
+            $id_outlet = $session->id_outlet;
+            $data['session'] = $session;
+        }
+        //var_dump($session); exit();
+        // QUERY MELALUI MODEL
+        $model = new AOModel();
+        $data['running_text'] = $model->getContentByID($id_konten)->getResult();
+        $data['session'] = $session;
+
+        return view('adminoutlet/view_running_text', $data);
     }
 
     // reset password password
@@ -265,7 +286,7 @@ class AO extends BaseController {
         $password_hash = password_hash($default_password, PASSWORD_DEFAULT, $options);
         $model->resetPassword($id_outlet, $password_hash);
         //var_dump($password_hash); exit();
-        
+
         $session->setFlashdata('resetPasswOutletStatus', 'Reset password untuk outlet ' . $nama_outlet . ' berhasil. Password sekarang adalah ' . $default_password . '.');
 
         // go to previous page

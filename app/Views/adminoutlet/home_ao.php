@@ -4,6 +4,7 @@ foreach ($count_content as $key => $value) {
     $countActive = $value->countActive;
     $countImage = $value->countImage;
     $countVideo = $value->countVideo;
+    $countTeks = $value->countTeks;
 }
 ?>
 <!DOCTYPE html>
@@ -115,9 +116,9 @@ foreach ($count_content as $key => $value) {
 
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">UI Kits</a></li>
-                    <li class="active">Elements</li>
+                    <li><a href="<?= base_url('public/') ?>">Home</a></li>
+                    <!--<li><a href="#">UI Kits</a></li>-->
+                    <li class="active">Dashboard</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -154,15 +155,28 @@ foreach ($count_content as $key => $value) {
                         <!-- END PROFIL ADMIN OUTLET -->
 
                         <!-- START WIDGET -->
+                        <div class="col-md-6">
+                            <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-dropbox"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count"><?= $countAll ?></div>
+                                    <div class="widget-title">Jumlah konten</div>
+                                    <div class="widget-subtitle">Semua</div>
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
                                 <div class="widget-item-left">
                                     <span class="fa fa-play-circle"></span>
                                 </div>
                                 <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countAll ?></div>
+                                    <div class="widget-int num-count"><?= $countActive ?></div>
                                     <div class="widget-title">Jumlah konten</div>
-                                    <div class="widget-subtitle">Semua</div>
+                                    <div class="widget-subtitle">Aktif</div>
                                 </div>
 
                             </div>
@@ -183,7 +197,7 @@ foreach ($count_content as $key => $value) {
                         <div class="col-md-3">
                             <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
                                 <div class="widget-item-left">
-                                    <span class="fa fa-video-camera"></span>
+                                    <span class="fa fa-file-video-o"></span>
                                 </div>
                                 <div class="widget-data">
                                     <div class="widget-int num-count"><?= $countVideo ?></div>
@@ -196,12 +210,12 @@ foreach ($count_content as $key => $value) {
                         <div class="col-md-3">
                             <div class="widget widget-default widget-item-icon" onclick="location.href = 'pages-messages.html';">
                                 <div class="widget-item-left">
-                                    <span class="fa fa-play-circle-o"></span>
+                                    <span class="fa fa-file-text"></span>
                                 </div>
                                 <div class="widget-data">
-                                    <div class="widget-int num-count"><?= $countActive ?></div>
-                                    <div class="widget-title">Jumlah konten</div>
-                                    <div class="widget-subtitle">Aktif</div>
+                                    <div class="widget-int num-count"><?= $countTeks ?></div>
+                                    <div class="widget-title">Teks berjalan</div>
+                                    <div class="widget-subtitle"></div>
                                 </div>
 
                             </div>
