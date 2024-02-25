@@ -49,6 +49,13 @@ $routes->get('activate_content_ao/(:num)', 'AO::activate_content/$1');
 $routes->get('deactivate_content_ao/(:num)', 'AO::deactivate_content/$1');
 $routes->get('view_running_text/(:num)', 'AO::view_running_text/$1');
 
+// client
+$routes->get('formlogin_c', 'ClientAuth::formlogin_client');
+$routes->post('login_c', 'ClientAuth::login_client');
+$routes->get('home_c', 'Client::index');
+$routes->get('get_content_active_ajax', 'AOAjax::get_content_active');
+$routes->get('logout_c', 'Client::logout_c');
+
 // superadmin
 $routes->get('home_sa', 'Superadmin::index');
 $routes->get('formlogin_sa', 'SuperadminAuth::formlogin_superadmin');
@@ -57,9 +64,6 @@ $routes->post('input_outlet', 'Superadmin::insert_outlet');
 $routes->get('del_outlet/(:num)', 'Superadmin::delete_outlet/$1');
 $routes->get('logout_sa', 'Superadmin::logout_superadmin');
 $routes->get('reset_passw_outlet/(:num)', 'Superadmin::resetpassw_outlet/$1');
-
-// client
-$routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 
 /*
  * --------------------------------------------------------------------

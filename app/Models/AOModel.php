@@ -27,12 +27,21 @@ class AOModel extends Model {
     protected $skipValidation = false;
 
     // get content by ID outlet
-    public function getContentByOutlet($id_outlet) {
+    public function getContentByOutlet($id_outlet, $filter_content) {
         // tampilkan menggunakan query builder
         $builder = $this->builder();
-
+        
         $builder->select('id_content, jenis_content, screen_orientation, nama_content, data AS konten, aktif, DATE_FORMAT(timestamp, \'%d %b %Y %H:%i:%s\') timestamp');
-        $builder->where('id_outlet', $id_outlet);
+        // jika request all content
+        if($filter_content == 'all'){
+            $builder->where('id_outlet', $id_outlet);
+        }
+        // jika request active content
+        elseif($filter_content == 'active'){
+            $builder->where('id_outlet', $id_outlet);
+            $builder->where('aktif', '1');
+        }
+        
         //return $builder->getCompiledSelect();
         $query = $builder->get();
         return $query;

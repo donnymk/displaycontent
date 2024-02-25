@@ -16,11 +16,11 @@ var stateSlideshow = 0; //  0 = idle, 1 = running, 2 = stopped
 // kondisi awal aktifkan input untuk konten multimedia (gambar dan video)
 aktifkan_konten_mm();
 
-// get data content from ajax request
+// get data konten outlet yang aktif dari ajax request
 // then:
 // 1. create Datatable (https://datatables.net/examples/data_sources/js_array.html)
 // 2. filter konten video yang aktif dan format data sesuai yang dibutuhkan video.js
-fetch("get_content_ao_ajax", {
+fetch("get_content_active_ajax", {
     method: "GET",
     headers: {
         "Content-Type": "application/json",
@@ -39,9 +39,7 @@ fetch("get_content_ao_ajax", {
                     {title: 'Screen Orientation'},
                     {title: 'Nama konten'},
                     {title: 'Konten'},
-                    {title: 'Status'},
-                    {title: 'Ditambahkan'},
-                    {title: ''}
+                    {title: 'Ditambahkan'}
                 ],
                 data: JSON.parse(json_datatable)
             });
@@ -186,20 +184,14 @@ function set_contents_datatable(data) {
 
     for (let i = 0; i < ajax_data.length; i++) {
         var list = [];
-        // status default adalah "aktif"
-        var status = '<a href="deactivate_content_ao/' + ajax_data[i].id_content + '" title="Nonaktifkan"><span class="fa fa-toggle-on"></span></a>';
         // tombol view video
         var tombol_view = '<a href="" data-toggle="modal" data-target="#modal_play" onclick="return play_video(\'' + ajax_data[i].nama_content + '\',\'uploads/contents/' + ajax_data[i].konten + '\')" title="Putar video"><span class="fa fa-2x fa-play"></span></a>';
-        // jika status konten tidak aktif
-        if (ajax_data[i].aktif === "0") {
-            status = '<a href="activate_content_ao/' + ajax_data[i].id_content + '" title="Aktifkan"><span class="fa fa-toggle-off"></span></a>';
-        }
         // tombol view image
         if (ajax_data[i].jenis_content === "gambar") {
             tombol_view = '<a href="" data-toggle="modal" data-target="#modal_view_img" onclick="return view_img(\'' + ajax_data[i].nama_content + '\',\'uploads/contents/' + ajax_data[i].konten + '\')" title="Tampilkan gambar"><span class="fa fa-2x fa-image"></span></a>';
         }
         // tombol view running text
-        if (ajax_data[i].jenis_content === "teks") {
+        else if (ajax_data[i].jenis_content === "teks") {
             tombol_view = '<a href="view_running_text/' + ajax_data[i].id_content + '" title="Tampilkan teks berjalan"><span class="fa fa-2x fa-file-text"></span></a>';
         }
         list.push(i+1);
@@ -207,9 +199,7 @@ function set_contents_datatable(data) {
         list.push(ajax_data[i].screen_orientation);
         list.push(ajax_data[i].nama_content);
         list.push(tombol_view);
-        list.push(status);
         list.push(ajax_data[i].timestamp);
-        list.push('<a href="delkonten_ao/' + ajax_data[i].id_content + '" onclick="return confirm(\'Yakin hapus konten ' + ajax_data[i].nama_content + '?\')"><span class="fa fa-trash-o"></span></a>');
         arr_datatables.push(list);
     }
     data_konten = JSON.stringify(arr_datatables);
@@ -293,6 +283,9 @@ function play_slideshow() {
         slideshow_images(intervalTime);
         // ubah keterangan tombol
         $('#btn-slideshow-images').html('<span class="fa fa-stop"></span> Stop slideshow');
+        
+        // request fullscreen
+        makeFullScreenDiv();
     }
     console.log(stateSlideshow);
 }

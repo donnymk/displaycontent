@@ -19,19 +19,9 @@ class AO extends BaseController {
     ) {
         parent::initController($request, $response, $logger);
 
-        // cek login
-        $this->cek_login();
-    }
-
-    public function cek_login() {
-        // initialize the session
-        $session = \Config\Services::session();
-
-        // jika belum login
-        if (!$session->has('logged_in')) {
-            echo '<script>window.location="' . base_url('public/formlogin_ao') . '"</script>';
-            exit();
-        }
+        // cek login Admin outlet
+        $cekLogin = new CekLogin();
+        $cekLogin->cek_login('AO');
     }
 
     public function index() {
@@ -51,7 +41,7 @@ class AO extends BaseController {
         // QUERY MELALUI MODEL
         $model = new AOModel();
         $data['count_content'] = $model->countContentById($id_outlet)->getResult();
-        $data['session'] = $session;
+        //$data['session'] = $session;
 
         return view('adminoutlet/home_ao', $data);
     }
@@ -68,14 +58,14 @@ class AO extends BaseController {
         //$data['username'] = null;
         // cek session login
         if ($session->has('username')) {
-            $id_outlet = $session->id_outlet;
+            //$id_outlet = $session->id_outlet;
             $data['session'] = $session;
         }
         //var_dump($session); exit();
         // QUERY MELALUI MODEL
-        $model = new AOModel();
+        //$model = new AOModel();
         //$data['content'] = $model->getContentByOutlet($id_outlet)->getResult();
-        $data['session'] = $session;
+        //$data['session'] = $session;
 
         //return view('adminoutlet/kelolakonten_ao', $data);
         return view('adminoutlet/kelolakonten_ao_alt', $data);
@@ -261,7 +251,7 @@ class AO extends BaseController {
         // QUERY MELALUI MODEL
         $model = new AOModel();
         $data['running_text'] = $model->getContentByID($id_konten)->getResult();
-        $data['session'] = $session;
+        //$data['session'] = $session;
 
         return view('adminoutlet/view_running_text', $data);
     }

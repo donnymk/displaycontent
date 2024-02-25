@@ -24,7 +24,7 @@ class AOAjax extends BaseController {
         if ($this->request->isAJAX()) {
             // QUERY MELALUI MODEL
             $AOmodel = new AOModel();
-            $get_data_content = $AOmodel->getContentByOutlet($id_outlet)->getResult();
+            $get_data_content = $AOmodel->getContentByOutlet($id_outlet, 'all')->getResult();
 
 //            foreach ($get_data_content as $key => $value):    
 //                // button update dan delete
@@ -42,6 +42,30 @@ class AOAjax extends BaseController {
 //                            $update_button.$delete_button)
 //                );
 //            endforeach;
+
+            $json_data = array(
+                //"data" => $data_content
+                "data" => $get_data_content
+            );
+            echo json_encode($json_data);
+        }
+        return false;
+    }
+    
+    // get data content admin outlet yang aktif
+    public function get_content_active() {
+        // initialize the session
+        $session = \Config\Services::session();
+
+        $id_outlet = $session->id_outlet;      
+        
+        $data_content = [];
+
+        // Check for AJAX request
+        if ($this->request->isAJAX()) {
+            // QUERY MELALUI MODEL
+            $AOmodel = new AOModel();
+            $get_data_content = $AOmodel->getContentByOutlet($id_outlet, 'active')->getResult();
 
             $json_data = array(
                 //"data" => $data_content
