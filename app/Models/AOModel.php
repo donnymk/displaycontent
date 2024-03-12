@@ -36,10 +36,22 @@ class AOModel extends Model {
         if($filter_content == 'all'){
             $builder->where('id_outlet', $id_outlet);
         }
-        // jika request active content
+        // jika request active content baik videos, images maupun teks
         elseif($filter_content == 'active'){
             $builder->where('id_outlet', $id_outlet);
             $builder->where('aktif', '1');
+        }
+       // jika request active videos
+        elseif($filter_content == 'active_videos'){
+            $builder->where('id_outlet', $id_outlet);
+            $builder->where('aktif', '1');
+            $builder->where('jenis_content', 'video');
+        }
+        // jika request active images
+        elseif($filter_content == 'active_images'){
+            $builder->where('id_outlet', $id_outlet);
+            $builder->where('aktif', '1');
+            $builder->where('jenis_content', 'gambar');
         }
         
         //return $builder->getCompiledSelect();
