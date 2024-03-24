@@ -54,8 +54,9 @@ $routes->get('formlogin_c', 'ClientAuth::formlogin_client');
 $routes->post('login_c', 'ClientAuth::login_client');
 $routes->get('home_c', 'Client::index');
 $routes->get('get_content_active_ajax', 'AOAjax::get_content_active');
-$routes->get('get_videos_api/(:num)', 'AOAjax::get_videos_api/$1');
-$routes->get('get_images_api/(:num)', 'AOAjax::get_images_api/$1');
+$routes->get('get_client_api/(:alphanum)', 'ClientAuth::get_client_api/$1');
+$routes->get('get_videos_api/(:num)', 'Client::get_videos_api/$1');
+$routes->get('get_images_api/(:num)', 'Client::get_images_api/$1');
 $routes->get('logout_c', 'Client::logout_c');
 
 // superadmin

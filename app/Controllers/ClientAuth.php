@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-// import model untuk mengelola data admin outlet
+// import model untuk mengelola data outlet
 use App\Models\AOAuthModel;
 
 // class bagi Client sebelum login dan sampai proses login
@@ -69,6 +69,44 @@ class ClientAuth extends BaseController {
             // Go to specific URI
             return redirect()->to(base_url('public/formlogin_c'));
         }
+    }
+    
+    // get data outlet melalui API
+    public function get_client_api($inputUsername) {
+
+        $respon = [
+            'status' => 'gagal',
+            'message' => 'Outlet tidak ditemukan'
+        ];
+
+        // QUERY MELALUI MODEL
+        $model = new AOAuthModel();
+        $select_ao = $model->authAO($inputUsername);
+
+        // jika admin outlet ditemukan
+        if(count($select_ao) != 0){
+            $id_outlet = $select_ao[0]->id_outlet;
+            $nama_outlet = $select_ao[0]->nama_outlet;
+            $alamat_outlet = $select_ao[0]->alamat_outlet;
+            $kota = $select_ao[0]->kota;
+            $foto_outlet = $select_ao[0]->foto_outlet;
+
+            $data_outlet = [
+                'username' => $inputUsername,
+                'nama_outlet' => $nama_outlet,
+                'id_outlet' => $id_outlet, 
+                'alamat_outlet' => $alamat_outlet,
+                'kota' => $kota,
+                'foto_outlet' => $foto_outlet                
+            ];            
+            $respon = [
+                'status' => 'berhasil',
+                'message' => 'Outlet ditemukan',
+                'data_outlet' => $data_outlet
+            ];
+        }
+
+        return $this->response->setJSON($respon);
     }
 
 }
