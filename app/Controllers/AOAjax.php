@@ -120,4 +120,27 @@ class AOAjax extends BaseController {
 
         return $this->response->setJSON($data_content);
     }
+    
+    // get data text outlet yang aktif melalui API
+    public function get_text_api($id_outlet) {
+
+        $data_content = [];
+        $base_url = base_url();
+
+        // QUERY MELALUI MODEL
+        $AOmodel = new AOModel();
+        $get_data_content = $AOmodel->getContentByOutlet($id_outlet, 'active_text')->getResult();
+
+        foreach ($get_data_content as $value):
+            
+            array_push($data_content,
+                    array("orientasi_layar" => $value->screen_orientation,
+                        "nama_konten" => $value->nama_content,
+                        "konten" => $value->konten,
+                        "timestamp" => $value->timestamp)
+            );
+        endforeach;
+
+        return $this->response->setJSON($data_content);
+    }
 }

@@ -53,6 +53,12 @@ class AOModel extends Model {
             $builder->where('aktif', '1');
             $builder->where('jenis_content', 'gambar');
         }
+        // jika request active text
+        elseif($filter_content == 'active_text'){
+            $builder->where('id_outlet', $id_outlet);
+            $builder->where('aktif', '1');
+            $builder->where('jenis_content', 'teks');
+        }
         
         //return $builder->getCompiledSelect();
         $query = $builder->get();
