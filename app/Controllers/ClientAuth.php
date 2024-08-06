@@ -89,11 +89,13 @@ class ClientAuth extends BaseController {
             $nama_outlet = $select_ao[0]->nama_outlet;
             $alamat_outlet = $select_ao[0]->alamat_outlet;
             $kota = $select_ao[0]->kota;
-            $foto_outlet = $select_ao[0]->foto_outlet;
-		$foto_outlet = base_url('public/uploads/'.$foto_outlet);
+            $foto_outlet_ = $select_ao[0]->foto_outlet;
 			// jika foto tidak diupload, pakai foto default
-			if($foto_outlet == ''){
+			if($foto_outlet_ == ''){
 				$foto_outlet = base_url('assets/images/users/no-image.jpg');
+			}
+			else{
+				$foto_outlet = base_url('public/uploads/'.$foto_outlet_);
 			}
 
             $data_outlet = [
